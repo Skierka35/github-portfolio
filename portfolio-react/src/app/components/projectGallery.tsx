@@ -37,7 +37,6 @@ const projects: project[] = [
 export default function Gallery() {
     return(
         <section className="P-8, mx-auto">
-        <h2 className="text-3x1 font-bold mb-6"> Moje projekty</h2>
         <p>Tu znajdziesz moje ostatnie projekty. Portfolio będzie aktualizowane na bieżąco!</p>
          {projects.map((project) => (
           <div

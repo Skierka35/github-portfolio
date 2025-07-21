@@ -4,26 +4,28 @@ import Image from 'next/image';
 
 export default function ImageOnScroll() {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [hasAppeared, setHasAppeared] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasAppeared(true);
+          observer.disconnect(); // zatrzymuje obserwację po 1 razie
+        }
+      },
       { threshold: 0.3 }
     );
 
     if (ref.current) observer.observe(ref.current);
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div
       ref={ref}
-      className={`flex justify-center items-center transition-opacity duration-1000 ease-in-out ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
+      className={`transition-all duration-1000 ease-out transform flex justify-center items-center
+        ${hasAppeared ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <Image
         src="/prof.jpg"

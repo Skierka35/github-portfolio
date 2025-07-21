@@ -24,25 +24,23 @@ export default function CloudLayer() {
         id,
         top: `${Math.random() * 70 + 10}%`,
         left: `${Math.random() * 100}%`,
-        size: Math.random() * 250 + 200, // 200-450px
-        duration: Math.random() * 40 + 40, // 40-80s
+        size: Math.random() * 250 + 200, 
+        duration: Math.random() * 40 + 40, 
         delay: Math.random() * 10,
-        opacity: Math.random() * 0.1 + 0.05, // bardzo subtelne 0.05 - 0.15
+        opacity: Math.random() * 0.1 + 0.05,
         direction: Math.random() > 0.5 ? 'left' : 'right',
       };
     }
 
-    // Generuj chmury na start
     setClouds(Array.from({ length: count }, (_, i) => generateCloud(i)));
 
-    // Opcjonalnie co jakiś czas wymieniaj chmurę na nową losową
     const interval = setInterval(() => {
       setClouds((oldClouds) => {
         const newClouds = oldClouds.slice(1);
         newClouds.push(generateCloud(Date.now()));
         return newClouds;
       });
-    }, 30000); // co 30 sekund jedna chmura się wymienia
+    }, 30000);
 
     return () => clearInterval(interval);
   }, []);

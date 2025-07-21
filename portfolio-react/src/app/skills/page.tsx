@@ -16,7 +16,7 @@ const languages = [
   { name: 'Niemiecki', level: 30 },
 ];
 
-const inventory = ['Prawojazdy kat. B','Tytuł inżyniera', 'Programowanie C#', 'Pakiet Adobe', 'Pakiet Microsoft', 'Modelowanie Blender',];
+const inventory = ['Programowanie C#', 'Pakiet Adobe', 'Pakiet Microsoft', 'Blender','Figma'];
 
 export default function RPGSkillsPanel() {
   return (
@@ -82,17 +82,19 @@ export default function RPGSkillsPanel() {
                 </div>
               </div>
 
-      {/* Sekcja ekwipunku */}
       <div>
-        <h3 className="text-xl mb-2">Osiągnięcia</h3>
-        <div className="flex space-x-4">
+        <h3 className="text-xl mb-2">Umiejętności</h3>
+        <div className="flex space-x-4 mb-2">
           {inventory.map((item, i) => (
             <div key={i} className="bg-gray-800 p-2 rounded border border-gray-600">
               {item}
             </div>
           ))}
         </div>
+        <h3 className="text-xl mb-2">Edukacja</h3>
+        <h1 className="bg-gray-800 p-2 rounded border border-gray-600 w-max"> WSIZ Bielsko-Biała - Tytuł inżyniera</h1>
       </div>
+
     </div>
     </section>
   );

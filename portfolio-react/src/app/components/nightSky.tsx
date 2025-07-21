@@ -12,7 +12,7 @@ interface Star {
   twinkleDuration: number;
 }
 
-export default function nightSky() {
+export default function NightSky() {  // <- tu zmieniona wielka litera
   const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {

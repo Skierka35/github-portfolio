@@ -4,22 +4,22 @@ import Link from "next/link";
 
 const projects = [
   {
-    title: "Wizualizacje stron",
-    description: "Wizualizacje stron internetowych wykonane za pomocą programu Figma.",
-    image: "/project-3d.png",
-    link: "https://github.com/Skierka35/3d-portfolio",
+    title: "ChattieGames App",
+    description: "Projekt strony gry towarzyskiej.",
+    image: "/chattieGamesApp.png",
+    link: "https://portfolio-preview-skierka.netlify.app/projects/chattieGamesApp",
   },
   {
     title: "Budgeting App",
-    description: "Aplikacja wykonana w react, służąca do monitorowania wydatków.",
-    image: "/note-app.png",
-    link: "https://github.com/Skierka35/note-app",
+    description: "Aplikacja służąca do monitorowania wydatków. Projekt grupowy.",
+    image: "/budgetingapp.png",
+    link: "https://portfolio-preview-skierka.netlify.app/projects/budgetingApp",
   },
   {
     title: "Projekt portfolio",
-    description: "Projekt aktualnego projektu portfolio udostępniony na platformie github",
-    image: "/restaurant-site.png",
-    link: "https://github.com/Skierka35/restaurant-site",
+    description: "Projekt aktualnej strony z udostępnionym portfolio na platformie nestify",
+    image: "/portfoliosite.png",
+    link: "https://portfolio-preview-skierka.netlify.app/projects/portfolioInfo",
   },
 ];
 

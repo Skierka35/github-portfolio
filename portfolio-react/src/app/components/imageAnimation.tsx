@@ -11,7 +11,7 @@ export default function ImageOnScroll() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setHasAppeared(true);
-          observer.disconnect(); // zatrzymuje obserwację po 1 razie
+          observer.disconnect();
         }
       },
       { threshold: 0.3 }
@@ -30,8 +30,8 @@ export default function ImageOnScroll() {
       <Image
         src="/prof.jpg"
         alt="Moje zdjęcie"
-        width={300}
-        height={300}
+        width={350}
+        height={350}
         className="rounded-lg shadow-lg"
       />
     </div>

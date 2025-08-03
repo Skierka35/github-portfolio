@@ -14,13 +14,11 @@ Repozytorium na GitHub:
 
 ## Technologie użyte w projekcie
 
-- [React](https://reactjs.org/) – biblioteka do budowy interfejsów użytkownika
-- [Next.js](https://nextjs.org/) – framework oparty na React, użyty do generowania statycznych stron
-- [Vite](https://vitejs.dev/) – szybki bundler do lokalnego developmentu (jeśli dotyczy)
-- [JavaScript](https://developer.mozilla.org/pl/docs/Web/JavaScript) i [TypeScript](https://www.typescriptlang.org/) – języki użyte w projekcie
-- [Tailwind CSS](https://tailwindcss.com/) – framework CSS oparty na klasach narzędziowych
+- [React](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
+- [JavaScript](https://developer.mozilla.org/pl/docs/Web/JavaScript) i [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 - [Netlify](https://www.netlify.com/) – platforma hostingowa, użyta do publikacji strony
-- [`@netlify/plugin-nextjs`](https://github.com/netlify/netlify-plugin-nextjs) – wtyczka Netlify do obsługi Next.js (jeśli używana)
 
 ---
 

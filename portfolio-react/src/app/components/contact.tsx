@@ -13,7 +13,7 @@ export default function ContactPage() {
       <p>Numer telefonu: +48 508 617 676 </p>
       <br></br>
       <a 
-        href="https://github.com/Skierka35/github-portfolio" 
+        href="https://github.com/Skierka35" 
         target="_blank" 
         rel="noopener noreferrer"
       >

@@ -15,9 +15,9 @@ export default function Navbar() {
     >
       <span className="text-lg font-bold">Skierka</span>
       <div className="ml-auto flex gap-6">
-        <Link href="/"><button className="text-white">Home</button></Link>
-        <Link href="/skills"><button className="text-white">Skills</button></Link>
-        <Link href="/projects"><button className="text-white">Projects</button></Link>
+        <Link href="/"><button className="text-white">Strona główna</button></Link>
+        <Link href="/skills"><button className="text-white">Umiejętności</button></Link>
+        <Link href="/projects"><button className="text-white">Projekty</button></Link>
       </div>
     </nav>
   );

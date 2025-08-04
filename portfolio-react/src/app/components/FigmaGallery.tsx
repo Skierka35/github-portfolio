@@ -4,22 +4,22 @@ import Link from "next/link";
 
 const projects = [
   {
-    title: "ChattieGames App",
-    description: "Projekt strony gry towarzyskiej.",
-    image: "/ChattieLoginPage.jpg",
-    link: "https://portfolio-preview-skierka.netlify.app/projects/chattieGamesApp",
+    title: "Tableheroes",
+    description: "Projekt wizualny strony internetowej o tematyce DND.",
+    image: "/tableheroes.png",
+    link: "https://www.figma.com/proto/u01N1L3IRgpiMZWiRGEQta/Untitled?t=U0XOsMiAWSSCYPA9-1",
   },
   {
-    title: "Budgeting App",
-    description: "Aplikacja służąca do monitorowania wydatków. Projekt grupowy.",
-    image: "/budgetingApp.jpg",
-    link: "https://portfolio-preview-skierka.netlify.app/projects/budgetingApp",
+    title: "Paws&Claws",
+    description: "Projekt wizualny strony świadczącej usługi.",
+    image: "/paws&claws.png",
+    link: "https://www.figma.com/proto/TXxwp9OUnAyJIxtYDSkZJo/Paws-Claws?node-id=0-1&t=U0XOsMiAWSSCYPA9-1",
   },
   {
-    title: "Projekt portfolio",
-    description: "Projekt aktualnej strony z udostępnionym portfolio na platformie nestify",
-    image: "/portfolio-react.jpg",
-    link: "https://portfolio-preview-skierka.netlify.app/projects/portfolio-react",
+    title: "Ciepłownictwo przyszłości",
+    description: "Projekt prezentujący działanie źródeł odnawialnych",
+    image: "/ciepłownictwo.jpg",
+    link: "https://www.figma.com/proto/gYuTbdH8RPIO3THTsXDfUs/Ciep%C5%82ownictwo-przysz%C5%82o%C5%9Bci?node-id=1-2&t=U0XOsMiAWSSCYPA9-1",
   },
 ];
 
@@ -51,7 +51,7 @@ function ProjectCard({ title, description, image, link }: typeof projects[0]) {
 export default function ProjectsSection() {
   return (
     <section className="py-30 px-4 text-white">
-      <h2 className="text-4xl font-bold text-center mb-30">Moje Projekty</h2>
+      <h1 className="text-3xl font-bold text-center mb-10">Projekty figma</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {projects.map((p, i) => (
           <ProjectCard key={i} {...p} />

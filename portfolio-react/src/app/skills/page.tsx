@@ -92,9 +92,16 @@ export default function RPGSkillsPanel() {
           ))}
         </div>
         <h3 className="text-xl mb-2">Edukacja</h3>
-        <h1 className="bg-gray-800 p-2 rounded border border-gray-600 w-max"> WSIZ Bielsko-Biała - Tytuł inżyniera</h1>
+        <h1 className="bg-gray-800 p-2 rounded border border-gray-600 w-max mb-4"> WSIZ Bielsko-Biała - Tytuł inżyniera</h1>
       </div>
-
+      <a
+        href="https://www.canva.com/design/DAFfLYtSII0/66z7NHtjSgi88m1rqifQpA/edit?utm_content=DAFfLYtSII0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-xl hover:bg-purple-800"
+      >
+        Link do CV
+      </a>
     </div>
     </section>
   );

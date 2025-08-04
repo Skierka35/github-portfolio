@@ -16,11 +16,11 @@ Repozytorium na GitHub:
 
 - [React](https://reactjs.org/) – biblioteka do budowy interfejsów użytkownika
 - [Next.js](https://nextjs.org/) – framework oparty na React, użyty do generowania statycznych stron
-- [Vite](https://vitejs.dev/) – szybki bundler do lokalnego developmentu (jeśli dotyczy)
+- [Vite](https://vitejs.dev/) – szybki bundler do lokalnego developmentu
 - [JavaScript](https://developer.mozilla.org/pl/docs/Web/JavaScript) i [TypeScript](https://www.typescriptlang.org/) – języki użyte w projekcie
 - [Tailwind CSS](https://tailwindcss.com/) – framework CSS oparty na klasach narzędziowych
 - [Netlify](https://www.netlify.com/) – platforma hostingowa, użyta do publikacji strony
-- [`@netlify/plugin-nextjs`](https://github.com/netlify/netlify-plugin-nextjs) – wtyczka Netlify do obsługi Next.js (jeśli używana)
+- [`@netlify/plugin-nextjs`](https://github.com/netlify/netlify-plugin-nextjs) – wtyczka Netlify do obsługi Next.js
 
 ---
 

@@ -12,18 +12,25 @@ export default function projectsPage() {
       </main>   
 
       <section className="p-6 text-center">
-        <h2 className="text-2xl font-semibold mb-4">Link do projektu github</h2>
+        <h2 className="text-2xl font-semibold mb-6">Link do platformy github</h2>
         <a
           href="https://github.com/Skierka35/ChattieGames"
           target="_blank"
-          className="inline-block bg-purple-700 text-white px-6 py-3 rounded hover:bg-purple-800 transition"
+          className="inline-block bg-purple-700 text-white px-6 py-3 rounded hover:bg-purple-800 transition mb-10"
         >
-          Otwórz aplikację
+          Kliknij, aby przejść
         </a>
-      </section>
 
-      <section className="p-6">
-      </section>
+        <h2 className="text-2xl font-semibold mb-4">Demo projektu</h2>
+      
+      <a
+          href="https://chattie-games.vercel.app/"
+          target="_blank"
+          className="inline-block bg-purple-700 text-white px-6 py-3 rounded hover:bg-purple-800 transition mb-6"
+        >
+          Kliknij, aby przejść
+        </a>
+        </section >
       </div>
   );
 }

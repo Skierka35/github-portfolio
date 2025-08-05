@@ -7,7 +7,7 @@ const projects = [
     title: "ChattieGames App",
     description: "Projekt strony gry towarzyskiej.",
     image: "/ChattieLoginPage.jpg",
-    link: "https://portfolio-preview-skierka.netlify.app/projects/chattieGamesApp",
+    link: "https://portfolio-preview-skierka.netlify.app/projects/chattieGames",
   },
   {
     title: "Budgeting App",

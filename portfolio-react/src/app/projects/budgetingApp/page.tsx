@@ -1,5 +1,4 @@
 import NightSky from '../../components/nightSky'
-import TechnologyShowcase from '../../components/technologyShowcase'
 
 export default function projectsPage() {
   return (
@@ -24,7 +23,6 @@ export default function projectsPage() {
       </section>
 
       <section className="p-6">
-        <TechnologyShowcase />
       </section>
       </div>
   );

@@ -5,7 +5,7 @@ To jest moje osobiste portfolio stworzone przy użyciu React i Next.js. Projekt 
 ## Demo
 
 Zobacz stronę online:  
-[portfolio-preview-skierka.netlify.app](https://687e39dbdd57dc41376885b1--portfolio-preview-skierka.netlify.app/)
+[portfolio-preview-skierka.netlify.app](https://portfolio-preview-skierka.netlify.app/)
 
 Repozytorium na GitHub:  
 [github.com/Skierka35/github-portfolio](https://github.com/Skierka35/github-portfolio/)

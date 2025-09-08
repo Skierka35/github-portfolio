@@ -4,20 +4,20 @@ import Link from "next/link";
 
 const projects = [
   {
-    title: "ChattieGames App",
-    description: "Projekt strony gry towarzyskiej.",
+    title: "Porojekty Graficzne",
+    description: "Twory reklamowe wykonane przy użyciu programów graficznych takich jak: Figma, Adobe, Canva.",
     image: "/ChattieLoginPage.jpg",
-    link: "https://portfolio-preview-skierka.netlify.app/projects/chattieGames",
+    link: "https://portfolio-preview-skierka.netlify.app/projects",
   },
   {
     title: "Budgeting App",
-    description: "Aplikacja służąca do monitorowania wydatków. Projekt grupowy.",
+    description: "Aplikacja służąca do monitorowania wydatków. Projekt grupowy zawierający obsługę bazy danych.",
     image: "/budgetingApp.jpg",
     link: "https://portfolio-preview-skierka.netlify.app/projects/budgetingApp",
   },
   {
     title: "Projekt portfolio",
-    description: "Projekt aktualnej strony z udostępnionym portfolio na platformie nestify",
+    description: "Projekt aktualnej strony z udostępnionym portfolio wykonany za pomocą next.js i hostingu nestlify.",
     image: "/portfolio-react.jpg",
     link: "https://portfolio-preview-skierka.netlify.app/projects/portfolio-react",
   },
@@ -41,7 +41,7 @@ function ProjectCard({ title, description, image, link }: typeof projects[0]) {
           target="_blank"
           className="bg-purple-700 hover:bg-purple-800 text-white text-sm px-4 py-2 rounded-md inline-block"
         >
-          Zobacz projekt
+          Dowiedz się więcej
         </Link>
       </div>
     </div>

@@ -5,7 +5,7 @@ export default function projectsPage() {
     <div className="text-white">
       <main className="py-12 px-6 text-center">
         <NightSky />
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">ChattieGames</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">Projekty Figma</h1>
         <p className="text-lg md:text-xl">
           Projekt strony internetowej służący do interakcji między użytkownikami.
         </p>

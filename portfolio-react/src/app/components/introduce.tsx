@@ -7,10 +7,9 @@ export default function Introduce() {
   const [isVisible, setIsVisible] = useState(false);
   
   const paragraphs = [
-  'Jestem absolwentką wyższej szkoły informatycznej ze specjalizacją w grafice reklamowej. Obecnie koncentruję się na rozwoju w kierunku front-end designu, łącząc wiedzę techniczną z estetyką i dbałością o doświadczenie użytkownika.',
-  'W wolnym czasie poszerzam wiedzę z zakresu tworzenia stron internetowych. Poza technologiami front-endowymi zgłębiam również podstawy back-endu — takie jak routing danych i tworzenie własnych baz danych — aby lepiej rozumieć działanie aplikacji jako całości i efektywniej współpracować w zespole.',
-  'Jestem osobą kreatywną, empatyczną i zdeterminowaną. Lubię działać, stawiać sobie cele i konsekwentnie je realizować. Wyzwania traktuję jako okazję do nauki i rozwoju.',
-  'Interesuję się rysunkiem klasycznym i digitalowym. Lubię gotować, fascynuje mnie temat zdrowego odżywiania i dobrych nawyków. W wolnych chwilach czytam książki fantasy oraz gram w gry komputerowe — zarówno w produkcje „cozy”, jak i w tytuły online ze znajomymi.',
+  'Jestem absolwentką wyższej szkoły informatycznej ze specjalizacją w grafice reklamowej. Obecnie koncentruję się na rozwoju moich umiejętności designu, łącząc wiedzę techniczną z estetyką i dbałością o doświadczenie użytkownika.',
+  'Jestem osobą kreatywną, empatyczną i otwartą na nowe doświadczenia. Lubię działać, stawiać sobie cele i konsekwentnie je realizować. Wyzwania lub porażki traktuję jako okazję do nauki i rozwoju.',
+  'Interesuję się rysunkiem klasycznym i digitalowym. Chętnie gotuję dla siebie i bliskich, interesuje mnie temat zdrowego odżywiania. W wolnych chwilach czytam książki fantasy oraz gram w gry komputerowe — jeżeli chodzi o gry chętnie zagram w większość tytułów i gatunków.',
   ];
 
   useEffect(() => {

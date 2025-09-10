@@ -4,16 +4,16 @@ import Link from "next/link";
 
 const projects = [
   {
-    title: "Tableheroes",
-    description: "Projekt wizualny strony internetowej o tematyce DND.",
-    image: "/tableheroes.png",
-    link: "https://www.figma.com/proto/u01N1L3IRgpiMZWiRGEQta/Untitled?t=U0XOsMiAWSSCYPA9-1",
-  },
-  {
     title: "Paws&Claws",
     description: "Projekt wizualny strony świadczącej usługi.",
     image: "/paws&claws.png",
     link: "https://www.figma.com/proto/TXxwp9OUnAyJIxtYDSkZJo/Paws-Claws?node-id=0-1&t=U0XOsMiAWSSCYPA9-1",
+  },
+  {
+    title: "Tableheroes",
+    description: "Projekt wizualny strony internetowej o tematyce DND.",
+    image: "/tableheroes.png",
+    link: "https://www.figma.com/proto/u01N1L3IRgpiMZWiRGEQta/Untitled?t=U0XOsMiAWSSCYPA9-1",
   },
   {
     title: "Ciepłownictwo przyszłości",
@@ -48,7 +48,7 @@ function ProjectCard({ title, description, image, link }: typeof projects[0]) {
   );
 }
 
-export default function ProjectsSection() {
+export default function ProjectsSectionF() {
   return (
     <section className="py-30 px-4 text-white">
       <h1 className="text-3xl font-bold text-center mb-10">Projekty figma</h1>

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const projects = [
   {
-    title: "Porojekty Graficzne",
+    title: "Projekty Graficzne",
     description: "Twory reklamowe wykonane przy użyciu programów graficznych takich jak: Figma, Adobe, Canva.",
     image: "/ChattieLoginPage.jpg",
     link: "https://portfolio-preview-skierka.netlify.app/projects",

@@ -4,19 +4,20 @@ import Image from 'next/image';
 import NightSky from '../components/nightSky';
 
 const skills = [
-  { name: 'React', level: 70 },
-  { name: 'Next.js', level: 80 },
-  { name: 'JavaScript', level: 75 },
-  { name: 'Tailwind CSS', level: 90 },
+  { name: 'React', level: 55},
+  { name: 'Next.js', level: 30},
+  { name: 'JavaScript', level: 40},
+  { name: 'Tailwind CSS', level: 60},
 
 ];
 
 const languages = [
-  { name: 'Angielski', level: 75 },
-  { name: 'Niemiecki', level: 30 },
+  { name: 'Polski - język ojczysty', level: 90},
+  { name: 'Angielski - B2, korzystam w codziennym życiu', level: 70 },
+  { name: 'Niemiecki - A2, uczę się', level: 35},
 ];
 
-const inventory = ['Programowanie C#', 'Pakiet Adobe', 'Pakiet Microsoft', 'Blender','Figma'];
+const inventory = ['Unity', 'język C#', 'Pakiet Adobe', 'Pakiet Microsoft', 'Blender','Figma'];
 
 export default function RPGSkillsPanel() {
   return (
@@ -63,7 +64,7 @@ export default function RPGSkillsPanel() {
       </div>
           
         <div className="mb-6">
-                <h3 className="text-xl mb-2">Dodatkowe informacje</h3>
+                <h3 className="text-xl mb-2">Znajomość języków</h3>
                 <div className="space-y-2">
                   {languages.map((skill) => (
                     <div key={skill.name}>
@@ -95,7 +96,7 @@ export default function RPGSkillsPanel() {
         <h1 className="bg-gray-800 p-2 rounded border border-gray-600 w-max mb-4"> WSIZ Bielsko-Biała - Tytuł inżyniera</h1>
       </div>
       <a
-        href="https://www.canva.com/design/DAFfLYtSII0/66z7NHtjSgi88m1rqifQpA/edit?utm_content=DAFfLYtSII0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+        href="https://www.canva.com/design/DAGvw52sRsM/33sWjhDqMizfdg3sKGC2eA/edit?utm_content=DAGvw52sRsM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
         target="_blank"
         rel="noopener noreferrer"
         className="text-xl hover:bg-purple-800"

@@ -1,7 +1,6 @@
 "use client";
 import ProjectCard from '../components/projectGallery'
 import NightSky from '../components/nightSky'
-import Tags from '../components/projectGallery'
 
 export default function projectsPage() {
   return (

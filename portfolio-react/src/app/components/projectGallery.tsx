@@ -21,7 +21,7 @@ const allProjects: Project[] = [
     title: "Budgeting App",
     description: "Projekt stworzony we współpracy zespołowej, podział na frontend i backend. Praca nad projektem była zorganizowana branchami. Aplikacja umożliwia użytkownikom śledzenie wydatków, tworzenie grup użytkowników w celu rozliczania wydatków. W projekcie moim celem było rozplanowanie funkcjonalności strony oraz praca z front'endem.",
     image: "/budgetingApp.JPG",
-    link: "budgeting-pi.vercel.app",
+    link: "https://budgeting-pi.vercel.app/demo",
     tags: ["UI/UX", "Projekty Graficzne/design"],
   },
   {
@@ -76,6 +76,14 @@ const allProjects: Project[] = [
     image: "ciepłownictwo.JPG",
     tags: ["Projekty Graficzne"],
     link: "https://www.figma.com/proto/gYuTbdH8RPIO3THTsXDfUs/Ciep%C5%82ownictwo-przysz%C5%82o%C5%9Bci?node-id=5-26&p=f&t=QLfHBYop7nfZu3O9-1&scaling=min-zoom&content-scaling=fixed&page-id=1%3A2",
+  },
+  {
+    id: 9,
+    title: "Character Creator",
+    description: "Prosty projekt kreatora postaci 3D w unity. Narzędzie te miało służyć jako kreator postaci z możliwością pobrania zasobów do osobnego projektu Unity za pomocą formatu .FBX. Projekt działa tylko w środowisku Unity.",
+    image: "/Modele postaci w blenderze.PNG",
+    link: "https://lillalll.itch.io/charactercreator",
+    tags: ["UI/UX", "Projekty Graficzne/design"],
   },
 ];
 

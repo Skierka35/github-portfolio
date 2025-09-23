@@ -87,7 +87,7 @@ const allProjects: Project[] = [
   },
   {
     id: 10,
-    title: "Cozy bedroom",
+    title: "Cozy Bedroom",
     description: "Projekt pokoju utworzony i wyrenderowany w programie blender. Prosta scena wykonana z podstawowych narzędzi przedstawiona w rzucie izometrycznym.",
     image: "/RenderResult.png",
     tags: ["3D", "Ilustracje"],

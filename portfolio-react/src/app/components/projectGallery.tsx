@@ -83,7 +83,14 @@ const allProjects: Project[] = [
     description: "Prosty projekt kreatora postaci 3D w unity. Narzędzie te miało służyć jako kreator postaci z możliwością pobrania zasobów do osobnego projektu Unity za pomocą formatu .FBX. Projekt działa tylko w środowisku Unity.",
     image: "/Modele postaci w blenderze.PNG",
     link: "https://lillalll.itch.io/charactercreator",
-    tags: ["UI/UX", "Projekty Graficzne/design"],
+    tags: ["3D"],
+  },
+  {
+    id: 10,
+    title: "Cozy bedroom",
+    description: "Projekt pokoju utworzony i wyrenderowany w programie blender. Prosta scena wykonana z podstawowych narzędzi przedstawiona w rzucie izometrycznym.",
+    image: "/RenderResult.png",
+    tags: ["3D, Ilustracje"],
   },
 ];
 

@@ -22,7 +22,7 @@ const allProjects: Project[] = [
     description: "Projekt stworzony we współpracy zespołowej, podział na frontend i backend. Praca nad projektem była zorganizowana branchami. Aplikacja umożliwia użytkownikom śledzenie wydatków, tworzenie grup użytkowników w celu rozliczania wydatków. W projekcie moim celem było rozplanowanie funkcjonalności strony oraz praca z front'endem.",
     image: "/budgetingApp.JPG",
     link: "https://budgeting-pi.vercel.app/demo",
-    tags: ["UI/UX", "Projekty Graficzne/design"],
+    tags: ["UI/UX"],
   },
   {
     id: 2,
@@ -45,7 +45,7 @@ const allProjects: Project[] = [
     description: "Spot reklamujący nowe smaki napoju owocowego Fluo. Marka, etykiety na napoje i animacja została wykonana za pomocą programu Canva.",
     video: "/fluoMP4.mp4",
     link: "https://www.canva.com/design/DAGx7mdE0gU",
-    tags: ["Animacje"],
+    tags: ["Projekty Graficzne/design"],
   },
   {
     id: 5,
@@ -53,14 +53,14 @@ const allProjects: Project[] = [
     description: "Krótka reklama wykonana w programie Canva. Założeniem projektu było utworzenie reklamy kulturowego wydarzenia w okolicy do 8 sekund.",
     video: "/ScaryMovieNight.mp4",
     link: "https://www.canva.com/design/DAFaaitDYig",
-    tags: ["Animacje"],
+    tags: ["Projekty Graficzne/design"],
   },
   {
     id: 6,
     title: "Food Swamp",
     description: "Projekt mający na celu 'wykorzystanie zdjęcia' w swoim projekcie. Jest to jaszczurka z nadgryzionej mocchi sezamowej i nietoperze z zupy ramen. Projekt został wykonany w programie Adobe photoshop.",
     image: "/FoodSwamp.png",
-    tags: ["Ilustracje", "Projekty Graficzne/design"],
+    tags: ["Ilustracje"],
   },
   {
     id: 7,
@@ -83,18 +83,18 @@ const allProjects: Project[] = [
     description: "Prosty projekt kreatora postaci 3D w unity. Narzędzie te miało służyć jako kreator postaci z możliwością pobrania zasobów do osobnego projektu Unity za pomocą formatu .FBX. Projekt działa tylko w środowisku Unity.",
     image: "/Modele postaci w blenderze.PNG",
     link: "https://lillalll.itch.io/charactercreator",
-    tags: ["3D"],
+    tags: ["Pozostałe"],
   },
   {
     id: 10,
     title: "Cozy Bedroom",
     description: "Projekt pokoju utworzony i wyrenderowany w programie blender. Prosta scena wykonana z podstawowych narzędzi przedstawiona w rzucie izometrycznym.",
     image: "/RenderResult.png",
-    tags: ["3D", "Ilustracje"],
+    tags: ["Pozostałe"],
   },
 ];
 
-const tags = ["Wszystko", "UI/UX", "Projekty Graficzne/design", "Ilustracje", "3D", "Animacje"];
+const tags = ["Wszystko", "UI/UX", "Projekty Graficzne/design", "Ilustracje", "Pozostałe"];
 
 function ProjectCard({
   title,

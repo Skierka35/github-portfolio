@@ -99,7 +99,6 @@ export default function PortfolioCard() {
   );
 }
 
-/* --- Pomocnicze mini-komponenty --- */
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>

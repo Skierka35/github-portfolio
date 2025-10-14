@@ -17,7 +17,7 @@ export default function Home() {
 
       <section className="relative justify-center flex flex-col">
         <NightSky />
-        <h1 className="py-2 text-4xl text-purple-500 font-bold mb-5"> 
+        <h1 className="py-2 text-4xl font-bold mb-5"> 
           Skontaktuj się ze mną
         </h1>
         <ContactPage />

@@ -175,7 +175,7 @@ export default function Portfolio() {
 
   return (
     <section className="py-20 px-6 text-white max-w-7xl mx-auto">
-      <h1 className="text-4xl font-bold text-center mb-10 text-emerald-400 drop-shadow-md">
+      <h1 className="text-4xl font-bold text-center mb-10 drop-shadow-md">
         Moje Projekty
       </h1>
 

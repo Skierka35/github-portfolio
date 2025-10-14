@@ -57,7 +57,7 @@ function ProjectCard({ title, description, image, link }: typeof projects[0]) {
 export default function ProjectsSection() {
   return (
     <section className="py-20 px-4 text-white relative z-10">
-      <h2 className="text-4xl font-bold text-center text-purple-500 mb-30 drop-shadow-lg">
+      <h2 className="text-4xl font-bold text-center mb-30 drop-shadow-lg">
         Moje Projekty
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">

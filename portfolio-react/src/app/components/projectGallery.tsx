@@ -19,7 +19,8 @@ const allProjects: Project[] = [
   {
     id: 1,
     title: "Budgeting App",
-    description: "Projekt stworzony we współpracy zespołowej, podział na frontend i backend. Praca nad projektem była zorganizowana branchami. Aplikacja umożliwia użytkownikom śledzenie wydatków, tworzenie grup użytkowników w celu rozliczania wydatków. W projekcie moim celem było rozplanowanie funkcjonalności strony oraz praca z front'endem.",
+    description:
+      "Projekt zespołowy: aplikacja do śledzenia wydatków i rozliczeń grupowych. Odpowiadałam za planowanie funkcjonalności oraz frontend.",
     image: "/budgetingApp.JPG",
     link: "https://budgeting-pi.vercel.app/demo",
     tags: ["UI/UX"],
@@ -27,74 +28,84 @@ const allProjects: Project[] = [
   {
     id: 2,
     title: "Paws&Claws",
-    description: "Projekt wykonany w programie Figma, prezentujący nowoczesny i przyjazny interfejs strony usługowej. Strona umożliwia przeglądanie oferty adopcyjnej zwierząt, informuje o godzinach pracy oraz oferuje usługi opieki nad pupilami. Projekt skupia się na czytelnej prezentacji informacji i intuicyjnej nawigacji dla użytkowników.",
+    description:
+      "Projekt UX/UI wykonany w Figmie, prezentujący przyjazny interfejs strony usługowej dla właścicieli zwierząt.",
     image: "/paws&claws.png",
-    embed: "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/TXxwp9OUnAyJIxtYDSkZJo",
     tags: ["UI/UX"],
   },
   {
     id: 3,
     title: "Wielkanocna łąka",
-    description: "Ilustracja fantasy wykonana digitalowo. Dużą rolę w tej ilustracji gra światło. Kolory są żywe, mające na celu odwzorować bajkowy klimat i wzbudzić pozytywne uczucia kojarzące się ze świętem. Ilustracja wykonana w Clip Studio na konkurs rysunkowy tła do gry.",
+    description:
+      "Ilustracja fantasy wykonana digitalowo. Bajkowy klimat, gra światłem i żywymi kolorami.",
     image: "/Forest.png",
     tags: ["Ilustracje"],
   },
   {
     id: 4,
     title: "Napoje Fluo",
-    description: "Spot reklamujący nowe smaki napoju owocowego Fluo. Marka, etykiety na napoje i animacja została wykonana za pomocą programu Canva.",
+    description:
+      "Spot reklamowy wykonany w Canvie — projekt etykiety i animacja promująca nowy smak napoju.",
     video: "/fluoMP4.mp4",
-    link: "https://www.canva.com/design/DAGx7mdE0gU",
     tags: ["Projekty Graficzne/design"],
   },
   {
     id: 5,
     title: "Scary Movie Night",
-    description: "Krótka reklama wykonana w programie Canva. Założeniem projektu było utworzenie reklamy kulturowego wydarzenia w okolicy do 8 sekund.",
+    description:
+      "Krótka reklama wydarzenia kulturalnego — dynamiczna animacja wykonana w Canvie.",
     video: "/ScaryMovieNight.mp4",
-    link: "https://www.canva.com/design/DAFaaitDYig",
     tags: ["Projekty Graficzne/design"],
   },
   {
     id: 6,
     title: "Food Swamp",
-    description: "Projekt mający na celu 'wykorzystanie zdjęcia' w swoim projekcie. Jest to jaszczurka z nadgryzionej mocchi sezamowej i nietoperze z zupy ramen. Projekt został wykonany w programie Adobe photoshop.",
+    description:
+      "Kolaż wykonany w Photoshopie — zabawna kompozycja inspirowana jedzeniem i zwierzętami.",
     image: "/FoodSwamp.png",
     tags: ["Ilustracje"],
   },
   {
     id: 7,
     title: "Mushroom Village",
-    description: "Ilustracja fantasy wykonana digitalowo. Przedstawia wieczór w wiosce między źdźbłami trawy. Ilustracja wykonana w Clip Studio na konkurs rysunkowy tła do gry.",
+    description:
+      "Digitalowa ilustracja fantasy przedstawiająca spokojną wioskę wśród trawy.",
     image: "/MushroomVillage.png",
     tags: ["Ilustracje"],
   },
   {
     id: 8,
     title: "Sieć Ciepłownicza",
-    description: "Trzy slajdy w Figmie ukazujące działanie sieci ciepłowniczej, rolę pomp ciepła oraz podział użytkowników na prosumentów i konsumentów. Ilustracje w rzucie izometrycznym podkreślają efekt 3D.",
-    image: "ciepłownictwo.JPG",
-    tags: ["Projekty Graficzne"],
-    link: "https://www.figma.com/proto/gYuTbdH8RPIO3THTsXDfUs/Ciep%C5%82ownictwo-przysz%C5%82o%C5%9Bci?node-id=5-26&p=f&t=QLfHBYop7nfZu3O9-1&scaling=min-zoom&content-scaling=fixed&page-id=1%3A2",
+    description:
+      "Trzy slajdy Figmy wyjaśniające działanie sieci ciepłowniczej w stylu izometrycznym.",
+    image: "/ciepłownictwo.JPG",
+    tags: ["Projekty Graficzne/design"],
   },
   {
     id: 9,
     title: "Character Creator",
-    description: "Prosty projekt kreatora postaci 3D w unity. Narzędzie te miało służyć jako kreator postaci z możliwością pobrania zasobów do osobnego projektu Unity za pomocą formatu .FBX. Projekt działa tylko w środowisku Unity.",
+    description:
+      "Kreator postaci 3D w Unity z możliwością eksportu modelu FBX — projekt koncepcyjny.",
     image: "/Modele postaci w blenderze.PNG",
-    link: "https://lillalll.itch.io/charactercreator",
     tags: ["Pozostałe"],
   },
   {
     id: 10,
     title: "Cozy Bedroom",
-    description: "Projekt pokoju utworzony i wyrenderowany w programie blender. Prosta scena wykonana z podstawowych narzędzi przedstawiona w rzucie izometrycznym.",
+    description:
+      "Izometryczny pokój wyrenderowany w Blenderze — prosta, przytulna scena 3D.",
     image: "/RenderResult.png",
     tags: ["Pozostałe"],
   },
 ];
 
-const tags = ["Wszystko", "UI/UX", "Projekty Graficzne/design", "Ilustracje", "Pozostałe"];
+const tags = [
+  "Wszystko",
+  "UI/UX",
+  "Projekty Graficzne/design",
+  "Ilustracje",
+  "Pozostałe",
+];
 
 function ProjectCard({
   title,
@@ -106,35 +117,47 @@ function ProjectCard({
 }: Project & { onClick: () => void }) {
   return (
     <div
-      className="bg-gray-800 rounded-2xl shadow-2xl transition-all overflow-hidden cursor-pointer"
+      className="relative bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl overflow-hidden cursor-pointer group transition-all"
       onClick={onClick}
     >
-      {video ? (
-        <video src={video} controls className="w-full h-64 object-cover" />
-      ) : image ? (
-        <Image
-          src={image}
-          alt={title}
-          width={500}
-          height={300}
-          className="w-full h-64 object-cover"
-        />
-      ) : null}
+      <div className="overflow-hidden h-56">
+        {video ? (
+          <video
+            src={video}
+            controls
+            className="w-full h-full object-cover group-hover:brightness-110 transition-all"
+          />
+        ) : image ? (
+          <Image
+            src={image}
+            alt={title}
+            width={500}
+            height={300}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+        ) : null}
+      </div>
 
-      <div className="p-5 text-white">
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-gray-400 text-justify text-sm mb-4">{description}</p>
+      <div className="p-5 text-gray-100">
+        <h3 className="text-xl font-semibold text-emerald-300 mb-2">
+          {title}
+        </h3>
+        <p className="text-gray-300 text-sm text-justify leading-relaxed mb-4">
+          {description}
+        </p>
         {link ? (
           <Link
             href={link}
             target="_blank"
-            className="bg-purple-700 hover:bg-purple-800 text-white text-sm px-4 py-2 rounded-md inline-block"
+            className="bg-purple-600/70 hover:bg-purple-700 text-white text-sm px-4 py-2 rounded-md inline-block transition"
             onClick={(e) => e.stopPropagation()}
           >
             Zobacz projekt
           </Link>
         ) : (
-          <span className="text-gray-400 text-sm">Kliknij, aby przybliżyć.</span>
+          <span className="text-gray-400 text-sm italic">
+            Kliknij, aby powiększyć
+          </span>
         )}
       </div>
     </div>
@@ -151,26 +174,29 @@ export default function Portfolio() {
       : allProjects.filter((project) => project.tags.includes(activeTag));
 
   return (
-    <section className="py-20 px-4 text-white max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold text-center mb-10">Moje Projekty</h1>
+    <section className="py-20 px-6 text-white max-w-7xl mx-auto">
+      <h1 className="text-4xl font-bold text-center mb-10 text-emerald-400 drop-shadow-md">
+        Moje Projekty
+      </h1>
 
-      <div className="flex flex-wrap gap-3 justify-center mb-10">
+      <div className="flex flex-wrap gap-3 justify-center mb-12">
         {tags.map((tag) => (
           <button
             key={tag}
             onClick={() => setActiveTag(tag)}
-            className={`px-4 py-2 rounded-xl border transition ${
-              activeTag === tag
-                ? "bg-purple-700 text-white"
-                : "bg-white text-black hover:bg-gray-200"
-            }`}
+            className={`px-5 py-2 rounded-xl border border-white/20 backdrop-blur-md transition-all 
+              ${
+                activeTag === tag
+                  ? "bg-purple-700/70 text-white shadow-lg"
+                  : "bg-white/10 text-gray-200 hover:bg-purple-400/20"
+              }`}
           >
             {tag}
           </button>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {filteredProjects.map((project) => (
           <ProjectCard
             key={project.id}
@@ -182,11 +208,11 @@ export default function Portfolio() {
 
       {selectedProject && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-6"
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="bg-gray-900 rounded-2xl overflow-hidden max-w-3xl w-full relative"
+            className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden max-w-3xl w-full relative"
             onClick={(e) => e.stopPropagation()}
           >
             {selectedProject.video ? (
@@ -206,16 +232,20 @@ export default function Portfolio() {
               />
             ) : null}
 
-            <div className="p-5 text-white">
-              <h3 className="text-2xl font-bold mb-2">{selectedProject.title}</h3>
-              <p className="text-gray-400">{selectedProject.description}</p>
+            <div className="p-6 text-gray-100">
+              <h3 className="text-2xl font-bold text-emerald-300 mb-3">
+                {selectedProject.title}
+              </h3>
+              <p className="text-gray-300 leading-relaxed mb-4">
+                {selectedProject.description}
+              </p>
               {selectedProject.link && (
                 <Link
                   href={selectedProject.link}
                   target="_blank"
-                  className="mt-4 inline-block bg-purple-700 hover:bg-purple-800 text-white text-sm px-4 py-2 rounded-md"
+                  className="mt-2 inline-block bg-purple-700/70 hover:bg-purple-700 text-white text-sm px-4 py-2 rounded-md transition"
                 >
-                  Zobacz projekt
+                  Otwórz projekt
                 </Link>
               )}
             </div>

@@ -1,15 +1,25 @@
 'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import ImageOnScroll from '../components/imageAnimation';
 
 export default function Introduce() {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
-  
-  const paragraphs = [
-  'Jestem absolwentką wyższej szkoły informatycznej ze specjalizacją w grafice reklamowej. Obecnie koncentruję się na rozwoju moich umiejętności designu, łącząc wiedzę techniczną z estetyką i dbałością o doświadczenie użytkownika.',
-  'Jestem osobą kreatywną, empatyczną i otwartą na nowe doświadczenia. Lubię działać, stawiać sobie cele i konsekwentnie je realizować. Wyzwania lub porażki traktuję jako okazję do nauki i rozwoju.',
-  'Interesuję się rysunkiem klasycznym i digitalowym. Chętnie gotuję dla siebie i bliskich, interesuje mnie temat zdrowego odżywiania. W wolnych chwilach czytam książki fantasy oraz gram w gry komputerowe — jeżeli chodzi o gry chętnie zagram w większość tytułów i gatunków.',
+
+  const sections = [
+    {
+      title: 'Co robię:',
+      text: 'Jestem absolwentką wyższej szkoły informatycznej ze specjalizacją w grafice reklamowej. Obecnie koncentruję się na rozwoju moich umiejętności designu, łącząc wiedzę techniczną z estetyką i dbałością o doświadczenie użytkownika.',
+    },
+    {
+      title: 'Kim jestem:',
+      text: 'Jestem osobą kreatywną, empatyczną i otwartą na nowe doświadczenia. Lubię działać, stawiać sobie cele i konsekwentnie je realizować. Wyzwania lub porażki traktuję jako okazję do nauki i rozwoju.',
+    },
+    {
+      title: 'Zainteresowania:',
+      text: 'Interesuję się rysunkiem klasycznym i digitalowym. Chętnie gotuję dla siebie i bliskich, interesuje mnie temat zdrowego odżywiania. W wolnych chwilach czytam książki fantasy oraz gram w gry komputerowe — jeżeli chodzi o gry chętnie zagram w większość tytułów i gatunków.',
+    },
   ];
 
   useEffect(() => {
@@ -26,23 +36,40 @@ export default function Introduce() {
   return (
     <section
       ref={ref}
-      className={`flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto p-8 transition-opacity duration-1000 ease-in-out ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
+      className={`max-w-6xl mx-auto px-6 md:px-10 py-16 flex flex-col md:flex-row items-center gap-14 
+      transition-all duration-1000 ease-in-out 
+      ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
-    <div className="md:w-1/2 text-center md:text-left">
-    <h2 className="text-3xl text-gray-200 font-bold mb-6">O mnie</h2>
-    {paragraphs.map((text, idx) => (
-      <p
-        key={idx}
-        className={`indent-8 text-justify ${idx !== 0 ? 'mt-4' : ''}`}
-      >
-        {text}
-      </p>
-    ))}
-    </div>
-      <div className="md:w-1/2 flex justify-center">
-        <ImageOnScroll />
+      <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-10 w-full flex flex-col md:flex-row items-center gap-14">
+
+        <div className="md:w-2/3 text-gray-100">
+          <h2 className="text-3xl font-bold mb-6 text-purple-500 drop-shadow-md">
+            O mnie
+          </h2>
+
+          <div className="space-y-5">
+            {sections.map((sec, idx) => (
+              <div key={idx}>
+                <h3 className="text-lg text-emerald-300 font-semibold mb-2">{sec.title}</h3>
+                <p className="text-gray-200/90 leading-relaxed text-justify tracking-wide mb-6">
+                  {sec.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="md:w-1/3 flex justify-center">
+          <div className="relative group flex justify-center items-center">
+            <div className="absolute -inset-4 bg-purple-500/20 blur-3xl opacity-50 transition-opacity rounded-2xl"></div>
+            <div className="overflow-hidden rounded-2xl shadow-lg transform group-hover:scale-[1.03] transition-transform duration-500">
+              <div className="w-auto max-h-[420px]">
+                <ImageOnScroll />
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );

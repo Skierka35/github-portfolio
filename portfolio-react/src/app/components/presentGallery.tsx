@@ -7,9 +7,9 @@ const projects = [
   {
     title: "Projekty Graficzne",
     description:
-      "Twory reklamowe wykonane przy użyciu programów graficznych takich jak: Figma, Adobe, Canva.",
-    image: "/ChattieLoginPage.jpg",
-    link: "https://portfolio-preview-skierka.netlify.app/projects",
+      "Projekt reklamowy marki herbaty TaoTao Tea.",
+    image: "/mockup1.PNG",
+    link: "https://portfolio-preview-skierka.netlify.app/projects/taotao",
   },
   {
     title: "Budgeting App",

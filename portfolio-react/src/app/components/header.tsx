@@ -13,7 +13,7 @@ export default function Navbar() {
         ${isHome ? 'sticky top-0 backdrop-blur-md bg-black/80' : ''}
       `}
     >
-      <span className="text-lg font-bold">Skierka</span>
+      <span className="text-lg font-bold">PORTFOLIO GRAFICZNE</span>
       <div className="ml-auto flex gap-6">
         <Link href="/"><button className="text-white">Strona główna</button></Link>
         <Link href="/skills"><button className="text-white">Umiejętności</button></Link>

@@ -97,6 +97,15 @@ const allProjects: Project[] = [
     image: "/RenderResult.png",
     tags: ["Pozostałe"],
   },
+  {
+    id: 11,
+    title: "TaoTaoTea",
+    description:
+      "Brand reklamowy marki TaoTao Tea.",
+    image: "/mockup1.PNG",
+    link: "https://portfolio-preview-skierka.netlify.app/projects/taotao",
+    tags: ["Projekty Graficzne/design"],
+  },
 ];
 
 const tags = [

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
 
 type Project = {
   id: number;
@@ -100,8 +101,7 @@ const allProjects: Project[] = [
   {
     id: 11,
     title: "TaoTaoTea",
-    description:
-      "Brand reklamowy marki TaoTao Tea.",
+    description: "Brand reklamowy marki TaoTao Tea.",
     image: "/mockup1.PNG",
     link: "https://portfolio-preview-skierka.netlify.app/projects/taotao",
     tags: ["Projekty Graficzne/design"],
@@ -124,16 +124,31 @@ function ProjectCard({
   link,
   onClick,
 }: Project & { onClick: () => void }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const handleOpen = () => {
+    // zatrzymujemy odtwarzanie, jeśli kliknięto
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+    onClick();
+  };
+
   return (
     <div
       className="relative bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl overflow-hidden cursor-pointer group transition-all"
-      onClick={onClick}
+      onClick={handleOpen}
     >
       <div className="overflow-hidden h-56">
         {video ? (
           <video
+            ref={videoRef}
             src={video}
-            controls
+            muted
+            loop
+            autoPlay
+            playsInline
             className="w-full h-full object-cover group-hover:brightness-110 transition-all"
           />
         ) : image ? (
@@ -148,9 +163,7 @@ function ProjectCard({
       </div>
 
       <div className="p-5 text-gray-100">
-        <h3 className="text-xl font-semibold text-emerald-300 mb-2">
-          {title}
-        </h3>
+        <h3 className="text-xl font-semibold text-emerald-300 mb-2">{title}</h3>
         <p className="text-gray-300 text-sm text-justify leading-relaxed mb-4">
           {description}
         </p>
@@ -221,7 +234,7 @@ export default function Portfolio() {
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden max-w-3xl w-full relative"
+            className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center relative"
             onClick={(e) => e.stopPropagation()}
           >
             {selectedProject.video ? (
@@ -229,19 +242,21 @@ export default function Portfolio() {
                 src={selectedProject.video}
                 controls
                 autoPlay
-                className="w-full h-auto object-cover"
+                className="max-w-full max-h-[80vh] object-contain rounded-t-2xl"
               />
             ) : selectedProject.image ? (
-              <Image
-                src={selectedProject.image}
-                alt={selectedProject.title}
-                width={800}
-                height={600}
-                className="w-full h-auto object-cover"
-              />
+              <div className="flex items-center justify-center w-full h-full max-h-[80vh] bg-black/30">
+                <Image
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  width={1200}
+                  height={800}
+                  className="max-w-full max-h-[80vh] object-contain rounded-t-2xl transition-transform duration-500"
+                />
+              </div>
             ) : null}
 
-            <div className="p-6 text-gray-100">
+            <div className="p-6 text-gray-100 w-full overflow-y-auto max-h-[30vh]">
               <h3 className="text-2xl font-bold text-emerald-300 mb-3">
                 {selectedProject.title}
               </h3>

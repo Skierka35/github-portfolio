@@ -10,15 +10,15 @@ export default function Introduce() {
   const sections = [
     {
       title: 'Co robię:',
-      text: 'Jestem absolwentką wyższej szkoły informatycznej ze specjalizacją w grafice reklamowej. Obecnie koncentruję się na rozwoju moich umiejętności designu, łącząc wiedzę techniczną z estetyką i dbałością o doświadczenie użytkownika.',
+      text: 'Jestem absolwentką wyższej szkoły informatycznej ze specjalizacją w grafice komputerowej. Obecnie koncentruję się na rozwoju moich umiejętności designu, łącząc wiedzę techniczną z estetyką i dbałością o doświadczenie użytkownika.',
     },
     {
       title: 'Kim jestem:',
-      text: 'Jestem osobą kreatywną, empatyczną i otwartą na nowe doświadczenia. Lubię działać, stawiać sobie cele i konsekwentnie je realizować. Wyzwania lub porażki traktuję jako okazję do nauki i rozwoju.',
+      text: 'Jestem osobą kreatywną, empatyczną, otwartą na nowe doświadczenia. Lubię działać, stawiać sobie cele i konsekwentnie je realizować. Wyzwania lub porażki traktuję jako okazję do nauki oraz rozwoju.',
     },
     {
       title: 'Zainteresowania:',
-      text: 'Interesuję się rysunkiem klasycznym i digitalowym. Chętnie gotuję dla siebie i bliskich, interesuje mnie temat zdrowego odżywiania. W wolnych chwilach czytam książki fantasy oraz gram w gry komputerowe — jeżeli chodzi o gry chętnie zagram w większość tytułów i gatunków.',
+      text: 'Interesuję się rysunkiem klasycznym i digitalowym. Chętnie gotuję dla siebie oraz bliskich, interesuje mnie temat zdrowego odżywiania. W wolnych chwilach czytam książki fantasy oraz gram w gry komputerowe.',
     },
   ];
 

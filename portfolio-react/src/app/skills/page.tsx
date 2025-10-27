@@ -2,8 +2,7 @@
 
 import Image from 'next/image';
 import NightSky from '../components/nightSky';
-import { FaLinkedin, FaFacebookSquare, FaArtstation } from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
+import { FaLinkedin, FaFacebookSquare, FaArtstation, FaGithub } from "react-icons/fa";
 
 const data = {
   name: 'Julia Koszczoł',
@@ -49,8 +48,21 @@ export default function PortfolioCard() {
             />
 
             <div className="flex space-x-4 text-2xl">
-              {[FaLinkedin, FaFacebookSquare, FaArtstation, SiGmail].map((Icon, i) => (
-                <Icon key={i} />
+              {[
+                { icon: FaLinkedin, link: 'https://www.linkedin.com/in/julia-koszczo%C5%82-199516226/' },
+                { icon: FaFacebookSquare, link: 'https://www.facebook.com/profile.php?id=100004515671116' },
+                { icon: FaArtstation, link: 'https://www.artstation.com/skierka' },
+                { icon: FaGithub, link: 'https://github.com/Skierka35' },
+              ].map(({ icon: Icon, link }, i) => (
+                <a
+                  key={i}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-purple-400 transition-colors"
+                >
+                  <Icon />
+                </a>
               ))}
             </div>
           </div>

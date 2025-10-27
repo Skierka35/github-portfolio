@@ -1,28 +1,55 @@
+'use client';
+
+import { useState } from "react";
 import Image from "next/image";
 
 export default function TaoTaoPage() {
+  const teas = [
+    {
+      name: "Sencha Standard",
+      desc: "Zielona herbata klasyczna. Lekka, orzeźwiająca - idealna na dobry początek dnia.",
+      img: "/taotao-classic.png",
+      modalImg: "/taotao-classic-loose.png",
+      modalDesc: "Herbata zielona klasyczna Sencha w formie sypkiej. China Sencha Standard, delikatny aromat, świeżość natury w każdej filiżance.",
+    },
+    {
+      name: "Golden Noon",
+      desc: "Czarna herbata z korzennymi dodatkami. Ciepła, jesienna kompozycja pełna energii.",
+      img: "/taotao-noon.png",
+      modalImg: "/taotao-noon-loose.png",
+      modalDesc: "Czarna herbata w formie sypkiej. Earl Grey z nutą cynamonu, imbiru, goździków i anyżu. Doskonała kompozycja korzenna, idealna na jesienne popołudnia.",
+    },
+    {
+      name: "Silent Night",
+      desc: "Ziołowa mieszanka z lawendą. Kojący smak, który pozwala wyciszyć umysł.",
+      img: "/taotao-night.png",
+      modalImg: "/taotao-night-loose.png",
+      modalDesc: "Mieszanka ziół: Sencha klasyczna, lawenda, rumianek, melisa. Kojący aromat i naturalny spokój w każdej filiżance.",
+    },
+  ];
+
+  const [selectedTea, setSelectedTea] = useState<null | typeof teas[0]>(null);
+
   return (
     <div className="text-[#3a2e1f] bg-[#faf6f0] min-h-screen">
-      <main className="py-16 px-4 sm:px-6 text-center bg-gradient-to-b from-[#f5e9dc] to-[#faf6f0]">
+
+      {/* Główna sekcja */}
+      <main className="py-10 px-4 sm:px-6 text-center bg-gradient-to-b from-[#f5e9dc] to-[#faf6f0]">
         <Image
-          src="/taotao-logo.png"
+          src="/Moodboard.png"
           alt="TaoTao Tea Logo"
-          width={140}
-          height={140}
-          className="mx-auto mb-6 w-32 h-auto sm:w-40"
+          width={500}
+          height={500}
+          className="mx-auto mb-6 w-32 h-auto sm:w-300"
         />
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-[#4c3b28]">
           Marka Herbaty TaoTao Tea
         </h1>
-        <p className="text-base sm:text-lg md:text-xl text-[#6b5b45] max-w-3xl mx-auto leading-relaxed p-4 sm:p-6">
-          TaoTao Tea to marka herbat inspirowana naturą, prostotą i codziennym
-          rytuałem spokoju. Projekt powstał w Canvie z myślą o stworzeniu
-          przyjaznego, ekologicznego wizerunku. To nie tylko herbata, lecz
-          filozofia spokoju, zaproszenie do zatrzymania się, głębszego oddechu i
-          odnalezienia równowagi w codziennym pośpiechu.
+        <p className="text-base sm:text-lg md:text-x2 text-[#6b5b45] max-w-3xl mx-auto leading-relaxed p-4 sm:p-6 text-justify">
+          TaoTao Tea to marka herbat głęboko inspirowana naturą, prostotą i codziennym rytuałem spokoju. Każda filiżanka ma być małą ucieczką od zgiełku dnia, zaproszeniem do zatrzymania się, głębszego oddechu i odnalezienia wewnętrznej równowagi. Projekt wizualny, stworzony w Canvie, podkreśla przyjazny, ekologiczny charakter marki – od stonowanej, naturalnej kolorystyki po delikatne, harmonijne ilustracje. TaoTao Tea to nie tylko herbata – to filozofia życia w rytmie natury, celebracja prostych przyjemności i codziennych chwil wyciszenia, które pozwalają na chwilę oddechu i regeneracji.
         </p>
       </main>
-
+      {/* Kolorystyka i Typografia */}
       <section className="max-w-5xl mx-auto py-12 sm:py-16 px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
           {/* Kolorystyka */}
@@ -46,8 +73,8 @@ export default function TaoTaoPage() {
                 )
               )}
             </div>
-            <p className="text-sm sm:text-base text-[#5c4b37] leading-relaxed">
-              Takie połączenie kolorów tworzy ciepły, spokojny nastrój oraz
+            <p className="text-sm sm:text-base text-[#5c4b37] leading-relaxed text-justify">
+              Takie połączenie kolorów tworzy ciepły, spokojny nastrój,
               podkreśla organiczny, ekologiczny charakter produktów.
             </p>
           </div>
@@ -62,7 +89,7 @@ export default function TaoTaoPage() {
               <br />
               <strong>Playful Display</strong> – proste, czytelne opisy smaków
             </p>
-            <p className="text-sm sm:text-base text-[#5c4b37] leading-relaxed">
+            <p className="text-sm sm:text-base text-[#5c4b37] leading-relaxed text-justify">
               Typografia odgrywa równie ważną rolę w budowaniu tożsamości marki.
               W warstwie graficznej projekt stawia na minimalizm i oddech.
               Delikatne ilustracje i przestrzeń podkreślają filozofię prostoty i
@@ -72,32 +99,18 @@ export default function TaoTaoPage() {
         </div>
       </section>
 
+      {/* Warianty Herbat */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-16">
         <h2 className="text-2xl sm:text-3xl font-semibold text-center text-[#5e4633] mb-8 sm:mb-10">
           Warianty Herbat
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-10">
-          {[
-            {
-              name: "Classic",
-              desc: "Zielona herbata klasyczna. Lekka, orzeźwiająca - idealna na dobry początek dnia.",
-              img: "/taotao-classic.png",
-            },
-            {
-              name: "Golden Noon",
-              desc: "Czarna herbata z korzennymi dodatkami. Ciepła, jesienna kompozycja pełna energii.",
-              img: "/taotao-noon.png",
-            },
-            {
-              name: "Silent Night",
-              desc: "Ziołowa mieszanka z lawendą. Kojący smak, który pozwala wyciszyć umysł.",
-              img: "/taotao-night.png",
-            },
-          ].map((tea) => (
+          {teas.map((tea) => (
             <div
               key={tea.name}
-              className="bg-[#f4e6d2] rounded-2xl p-5 sm:p-6 shadow-md text-center border border-[#e0d3c2] hover:scale-[1.02] transition-transform"
+              className="bg-[#f4e6d2] rounded-2xl p-5 sm:p-6 shadow-md text-center border border-[#e0d3c2] hover:scale-[1.02] transition-transform cursor-pointer"
+              onClick={() => setSelectedTea(tea)}
             >
               <Image
                 src={tea.img}
@@ -117,6 +130,34 @@ export default function TaoTaoPage() {
         </div>
       </section>
 
+      {/* Modal dla herbat z własnym opisem i zdjęciem */}
+      {selectedTea && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-[#faf6f0] rounded-2xl max-w-md w-full p-6 relative shadow-2xl">
+            <button
+              className="absolute top-3 right-3 text-gray-600 hover:text-gray-800 text-xl font-bold"
+              onClick={() => setSelectedTea(null)}
+            >
+              ×
+            </button>
+            <Image
+              src={selectedTea.modalImg || selectedTea.img}
+              alt={selectedTea.name}
+              width={300}
+              height={360}
+              className="mx-auto rounded-lg mb-4 object-contain w-full h-auto"
+            />
+            <h3 className="text-2xl font-bold text-[#4b3b2a] mb-2 text-center">
+              {selectedTea.name}
+            </h3>
+            <p className="text-[#6b5b45] text-base leading-relaxed text-justify">
+              {selectedTea.modalDesc || selectedTea.desc}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Prezentacja produktów */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-20 text-center">
         <h2 className="text-2xl sm:text-3xl font-semibold text-[#5e4633] mb-8 sm:mb-10">
           Prezentacja Produktów
@@ -139,6 +180,7 @@ export default function TaoTaoPage() {
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="bg-[#f5e9dc] border-t border-[#e0d3c2] py-12 sm:py-16 text-center text-sm sm:text-base">
         <a
           href="https://www.canva.com/design/DAG1yYq7SbA/aY-g-k7gX0bDp-hnp__PYA/edit?utm_content=DAG1yYq7SbA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"

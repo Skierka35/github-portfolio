@@ -8,7 +8,7 @@ const data = {
   name: 'Julia Koszczoł',
   title: 'Graphic Designer',
   avatar: '/profile.png',
-  cvLink: 'https://www.canva.com/design/DAGvw52sRsM/33sWjhDqMizfdg3sKGC2eA/edit?utm_content=DAGvw52sRsM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
+  cvLink: 'https://www.canva.com/design/DAHAL5uNy6o/ww3Tvz56rwAgutYcS69E0Q/edit?utm_content=DAHAL5uNy6o&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
   skills: [
     { name: 'React', level: 55 },
     { name: 'Next.js', level: 30 },

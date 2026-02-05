@@ -18,29 +18,12 @@ type Project = {
 
 const allProjects: Project[] = [
   {
-    id: 1,
-    title: "Budgeting App",
-    description:
-      "Projekt zespołowy: aplikacja do śledzenia wydatków i rozliczeń grupowych. Odpowiadałam za planowanie funkcjonalności oraz frontend.",
-    image: "/budgetingApp.JPG",
-    link: "https://budgeting-pi.vercel.app/demo",
-    tags: ["UI/UX"],
-  },
-  {
-    id: 2,
-    title: "Paws&Claws",
-    description:
-      "Projekt UX/UI wykonany w Figmie, prezentujący przyjazny interfejs strony usługowej dla właścicieli zwierząt.",
-    image: "/paws&claws.png",
-    tags: ["UI/UX"],
-  },
-  {
-    id: 3,
-    title: "Wielkanocna łąka",
-    description:
-      "Ilustracja fantasy wykonana digitalowo. Bajkowy klimat, gra światłem i żywymi kolorami.",
-    image: "/Forest.png",
-    tags: ["Ilustracje"],
+    id: 11,
+    title: "TaoTaoTea",
+    description: "Brand reklamowy marki TaoTao Tea.",
+    image: "/mockup1.PNG",
+    link: "https://portfolio-preview-skierka.netlify.app/projects/taotao",
+    tags: ["Projekty Graficzne/design"],
   },
   {
     id: 4,
@@ -59,21 +42,53 @@ const allProjects: Project[] = [
     tags: ["Projekty Graficzne/design"],
   },
   {
-    id: 6,
-    title: "Food Swamp",
+    id: 12,
+    title: "Bajkowy sen",
     description:
-      "Kolaż wykonany w Photoshopie — zabawna kompozycja inspirowana jedzeniem i zwierzętami.",
+      "Ilustracja digitalowa przedstawiająca jelenia śpiącego w magicznym lesie. Odnowiona graficznie adaptacja Wielkanocnej łąki.",
+    image: "/BajkowySen.png",
+    tags: ["Ilustracje"],
+  },
+  {
+    id: 6,
+    title: "Smaczne bagno",
+    description:
+      "Kolaż wykonany w Photoshopie — zabawna kompozycja inspirowana jedzeniem i zwierzętami. Przerobienie fragmentów zdjęć na element ilustracji.",
     image: "/FoodSwamp.png",
     tags: ["Ilustracje"],
   },
   {
     id: 7,
-    title: "Mushroom Village",
+    title: "Grzybowa wioska",
     description:
       "Digitalowa ilustracja fantasy przedstawiająca spokojną wioskę wśród trawy.",
     image: "/MushroomVillage.png",
     tags: ["Ilustracje"],
   },
+  {
+    id: 3,
+    title: "Wielkanocna łąka",
+    description:
+      "Ilustracja fantasy wykonana digitalowo. Bajkowy klimat, gra światłem i żywymi kolorami.",
+    image: "/Forest.png",
+    tags: ["Ilustracje"],
+  },
+  {
+    id: 2,
+    title: "Paws&Claws",
+    description:
+      "Projekt UX/UI wykonany w Figmie, prezentujący przyjazny interfejs strony usługowej dla właścicieli zwierząt.",
+    image: "/paws&claws.png",
+    tags: ["UI/UX"],
+  },
+  {
+    id: 10,
+    title: "Cozy Bedroom",
+    description:
+      "Izometryczny pokój wyrenderowany w Blenderze — prosta, przytulna scena 3D.",
+    image: "/RenderResult.png",
+    tags: ["Pozostałe"],
+  }, 
   {
     id: 8,
     title: "Sieć Ciepłownicza",
@@ -83,28 +98,13 @@ const allProjects: Project[] = [
     tags: ["Projekty Graficzne/design"],
   },
   {
-    id: 9,
-    title: "Character Creator",
+    id: 1,
+    title: "Budgeting App",
     description:
-      "Kreator postaci 3D w Unity z możliwością eksportu modelu FBX — projekt koncepcyjny.",
-    image: "/Modele postaci w blenderze.PNG",
-    tags: ["Pozostałe"],
-  },
-  {
-    id: 10,
-    title: "Cozy Bedroom",
-    description:
-      "Izometryczny pokój wyrenderowany w Blenderze — prosta, przytulna scena 3D.",
-    image: "/RenderResult.png",
-    tags: ["Pozostałe"],
-  },
-  {
-    id: 11,
-    title: "TaoTaoTea",
-    description: "Brand reklamowy marki TaoTao Tea.",
-    image: "/mockup1.PNG",
-    link: "https://portfolio-preview-skierka.netlify.app/projects/taotao",
-    tags: ["Projekty Graficzne/design"],
+      "Projekt zespołowy: aplikacja do śledzenia wydatków i rozliczeń grupowych. Odpowiadałam za planowanie funkcjonalności oraz frontend.",
+    image: "/budgetingApp.JPG",
+    link: "https://budgeting-pi.vercel.app/demo",
+    tags: ["UI/UX"],
   },
 ];
 

@@ -28,7 +28,7 @@ export default function ImageOnScroll() {
         ${hasAppeared ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <Image
-        src="/prof.jpg"
+        src="/profile.png"
         alt="Moje zdjęcie"
         width={350}
         height={350}

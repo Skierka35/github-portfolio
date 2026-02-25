@@ -1,46 +1,54 @@
-import Image from 'next/image';
+"use client";
+
+import { useLang } from "../components/languageProvider";
 
 export default function ContactPage() {
+  const { lang } = useLang();
+
+  const TEXT = {
+    pl: {
+      title: "Kontakt",
+      email: "Email",
+      phone: "Telefon",
+    },
+    en: {
+      title: "Contact",
+      email: "Email",
+      phone: "Phone",
+    },
+  } as const;
+
+  const t = TEXT[lang];
+
   return (
-    <section className="text-center text-gray-200">
-      <p>
-        Email:{" "} 
-        <a 
-          href="mailto:Julia.Koszczol112@gmail.com" 
-          className="text-purple-400 hover:underline"
-        >
-          Julia.Koszczol112@gmail.com
-        </a>
-      </p>
-      <p>Numer telefonu: +48 508 617 676</p>
-      <br />
-      <div className="flex justify-center gap-6">
-        <a 
-          href="https://github.com/Skierka35" 
-          target="_blank" 
-          rel="noopener noreferrer"
-        >
-          <Image
-            src="/github-logo.png"
-            width={60}
-            height={60}
-            alt="GitHub logo"
-            className="cursor-pointer transition hover:scale-110"
-          />
-        </a>
-        <a 
-          href="https://www.linkedin.com/in/julia-koszczoł-199516226" 
-          target="_blank" 
-          rel="noopener noreferrer"
-        >
-          <Image
-            src="/linked.png"
-            width={60}
-            height={60}
-            alt="LinkedIn"
-            className="cursor-pointer transition hover:scale-110"
-          />
-        </a>
+    <section className="w-full py-24 border-t border-black/10 dark:border-white/10">
+      <div className="max-w-6xl mx-auto px-6">
+
+        <div className="space-y-6 text-lg text-slate-700 dark:text-white/70">
+          <div>
+            <span className="block text-sm uppercase tracking-wider text-slate-500 dark:text-white/50 mb-1">
+              {t.email}
+            </span>
+            <a
+              href="mailto:Julia.Koszczol112@gmail.com"
+              className="hover:opacity-70 transition"
+            >
+              Julia.Koszczol112@gmail.com
+            </a>
+          </div>
+
+          <div>
+            <span className="block text-sm uppercase tracking-wider text-slate-500 dark:text-white/50 mb-1">
+              {t.phone}
+            </span>
+            <a
+              href="tel:+48508617676"
+              className="hover:opacity-70 transition"
+            >
+              +48 508 617 676
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

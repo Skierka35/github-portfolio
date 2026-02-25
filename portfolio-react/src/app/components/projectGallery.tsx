@@ -1,133 +1,38 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-
-type Project = {
-  id: number;
-  title: string;
-  description: string;
-  tags: string[];
-  image?: string;
-  video?: string;
-  embed?: string;
-  link?: string;
-};
-
-const allProjects: Project[] = [
-  {
-    id: 11,
-    title: "TaoTaoTea",
-    description: "Brand reklamowy marki TaoTao Tea.",
-    image: "/mockup1.PNG",
-    link: "https://portfolio-preview-skierka.netlify.app/projects/taotao",
-    tags: ["Projekty Graficzne/design"],
-  },
-  {
-    id: 4,
-    title: "Napoje Fluo",
-    description:
-      "Spot reklamowy wykonany w Canvie — projekt etykiety i animacja promująca nowy smak napoju.",
-    video: "/fluoMP4.mp4",
-    tags: ["Projekty Graficzne/design"],
-  },
-  {
-    id: 5,
-    title: "Scary Movie Night",
-    description:
-      "Krótka reklama wydarzenia kulturalnego — dynamiczna animacja wykonana w Canvie.",
-    video: "/ScaryMovieNight.mp4",
-    tags: ["Projekty Graficzne/design"],
-  },
-  {
-    id: 12,
-    title: "Bajkowy sen",
-    description:
-      "Ilustracja digitalowa przedstawiająca jelenia śpiącego w magicznym lesie. Odnowiona graficznie adaptacja Wielkanocnej łąki.",
-    image: "/BajkowySen.png",
-    tags: ["Ilustracje"],
-  },
-  {
-    id: 6,
-    title: "Smaczne bagno",
-    description:
-      "Kolaż wykonany w Photoshopie — zabawna kompozycja inspirowana jedzeniem i zwierzętami. Przerobienie fragmentów zdjęć na element ilustracji.",
-    image: "/FoodSwamp.png",
-    tags: ["Ilustracje"],
-  },
-  {
-    id: 7,
-    title: "Grzybowa wioska",
-    description:
-      "Digitalowa ilustracja fantasy przedstawiająca spokojną wioskę wśród trawy.",
-    image: "/MushroomVillage.png",
-    tags: ["Ilustracje"],
-  },
-  {
-    id: 3,
-    title: "Wielkanocna łąka",
-    description:
-      "Ilustracja fantasy wykonana digitalowo. Bajkowy klimat, gra światłem i żywymi kolorami.",
-    image: "/Forest.png",
-    tags: ["Ilustracje"],
-  },
-  {
-    id: 2,
-    title: "Paws&Claws",
-    description:
-      "Projekt UX/UI wykonany w Figmie, prezentujący przyjazny interfejs strony usługowej dla właścicieli zwierząt.",
-    image: "/paws&claws.png",
-    tags: ["UI/UX"],
-  },
-  {
-    id: 10,
-    title: "Cozy Bedroom",
-    description:
-      "Izometryczny pokój wyrenderowany w Blenderze — prosta, przytulna scena 3D.",
-    image: "/RenderResult.png",
-    tags: ["Pozostałe"],
-  }, 
-  {
-    id: 8,
-    title: "Sieć Ciepłownicza",
-    description:
-      "Trzy slajdy Figmy wyjaśniające działanie sieci ciepłowniczej w stylu izometrycznym.",
-    image: "/ciepłownictwo.JPG",
-    tags: ["Projekty Graficzne/design"],
-  },
-  {
-    id: 1,
-    title: "Budgeting App",
-    description:
-      "Projekt zespołowy: aplikacja do śledzenia wydatków i rozliczeń grupowych. Odpowiadałam za planowanie funkcjonalności oraz frontend.",
-    image: "/budgetingApp.JPG",
-    link: "https://budgeting-pi.vercel.app/demo",
-    tags: ["UI/UX"],
-  },
-];
-
-const tags = [
-  "Wszystko",
-  "UI/UX",
-  "Projekty Graficzne/design",
-  "Ilustracje",
-  "Pozostałe",
-];
+import { useSearchParams } from "next/navigation";
+import {
+  PROJECTS,
+  TAGS,
+  TAG_LABELS,
+  type Project,
+  type TagId,
+} from "../components/projects";
+import { useLang } from "../components/languageProvider";
 
 function ProjectCard({
-  title,
-  description,
-  image,
-  video,
-  link,
+  project,
+  lang,
   onClick,
-}: Project & { onClick: () => void }) {
+}: {
+  project: Project;
+  lang: "pl" | "en";
+  onClick: () => void;
+}) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  const title = lang === "en" ? project.titleEn ?? project.title : project.title;
+  const description =
+    lang === "en"
+      ? project.descriptionEn ?? project.description
+      : project.description;
+
+  const cover = project.images?.[0];
+
   const handleOpen = () => {
-    // zatrzymujemy odtwarzanie, jeśli kliknięto
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
@@ -137,48 +42,64 @@ function ProjectCard({
 
   return (
     <div
-      className="relative bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl overflow-hidden cursor-pointer group transition-all"
+      className="
+        relative rounded-2xl overflow-hidden cursor-pointer group transition
+        border border-black/10 bg-white hover:shadow-lg
+        dark:border-white/10 dark:bg-white/5 dark:backdrop-blur-xl
+      "
       onClick={handleOpen}
     >
-      <div className="overflow-hidden h-56">
-        {video ? (
+      <div className="overflow-hidden h-64 md:h-72 bg-black/5 dark:bg-black/20">
+        {project.video ? (
           <video
             ref={videoRef}
-            src={video}
+            src={project.video}
             muted
             loop
             autoPlay
             playsInline
-            className="w-full h-full object-cover group-hover:brightness-110 transition-all"
+            className="w-full h-full object-cover group-hover:brightness-110 transition"
           />
-        ) : image ? (
+        ) : cover ? (
           <Image
-            src={image}
+            src={cover}
             alt={title}
-            width={500}
-            height={300}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            width={900}
+            height={600}
+            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
           />
-        ) : null}
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-slate-500 dark:text-white/60">
+            {lang === "pl" ? "Brak miniatury" : "No thumbnail"}
+          </div>
+        )}
       </div>
 
-      <div className="p-5 text-gray-100">
-        <h3 className="text-xl font-semibold text-emerald-300 mb-2">{title}</h3>
-        <p className="text-gray-300 text-sm text-justify leading-relaxed mb-4">
+      <div className="p-6">
+        <h3 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">
+          {title}
+        </h3>
+
+        <p className="text-sm leading-relaxed text-slate-600 dark:text-white/70 mb-5 text-justify">
           {description}
         </p>
-        {link ? (
+
+        {project.link ? (
           <Link
-            href={link}
+            href={project.link}
             target="_blank"
-            className="bg-purple-600/70 hover:bg-purple-700 text-white text-sm px-4 py-2 rounded-md inline-block transition"
+            className="
+              inline-block text-sm font-medium px-4 py-2 rounded-lg transition
+              bg-black text-white hover:bg-black/90
+              dark:bg-white dark:text-black dark:hover:bg-white/90
+            "
             onClick={(e) => e.stopPropagation()}
           >
-            Zobacz projekt
+            {lang === "pl" ? "Zobacz projekt" : "View project"}
           </Link>
         ) : (
-          <span className="text-gray-400 text-sm italic">
-            Kliknij, aby powiększyć
+          <span className="text-sm text-slate-500 dark:text-white/60 italic">
+            {lang === "pl" ? "Kliknij, aby powiększyć" : "Click to enlarge"}
           </span>
         )}
       </div>
@@ -186,90 +107,211 @@ function ProjectCard({
   );
 }
 
-export default function Portfolio() {
-  const [activeTag, setActiveTag] = useState("Wszystko");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+export default function ProjectGallery() {
+  const { lang } = useLang();
+  const searchParams = useSearchParams();
 
-  const filteredProjects =
-    activeTag === "Wszystko"
-      ? allProjects
-      : allProjects.filter((project) => project.tags.includes(activeTag));
+  const [activeTag, setActiveTag] = useState<TagId>("all");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const gridRef = useRef<HTMLDivElement | null>(null);
+
+  // Czytanie tagu z URL: /projects?tag=illustration
+  useEffect(() => {
+    const tagFromUrl = searchParams.get("tag") as TagId | null;
+    if (tagFromUrl && TAGS.includes(tagFromUrl)) {
+      setActiveTag(tagFromUrl);
+      setTimeout(() => {
+        gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 80);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
+
+  const filteredProjects = useMemo(() => {
+    if (activeTag === "all") return PROJECTS;
+    return PROJECTS.filter((p) => p.tags.includes(activeTag));
+  }, [activeTag]);
+
+  const pickCategory = (tag: TagId) => {
+    setActiveTag(tag);
+    setTimeout(() => {
+      gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+  };
+
+  const heading = lang === "pl" ? "Moje projekty" : "My projects";
+  const subtitle =
+    lang === "pl"
+      ? "Wybierz kategorię albo przefiltruj tagami."
+      : "Choose a category or filter by tags.";
 
   return (
-    <section className="py-20 px-6 text-white max-w-7xl mx-auto">
-      <h1 className="text-4xl font-bold text-center mb-10 drop-shadow-md">
-        Moje Projekty
+    <section className="py-20 px-6 max-w-7xl mx-auto">
+      <h1 className="text-4xl font-semibold text-center mb-4 text-slate-900 dark:text-slate-100">
+        {heading}
       </h1>
+      <p className="text-center mb-10 text-slate-600 dark:text-white/70">
+        {subtitle}
+      </p>
 
-      <div className="flex flex-wrap gap-3 justify-center mb-12">
-        {tags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => setActiveTag(tag)}
-            className={`px-5 py-2 rounded-xl border border-white/20 backdrop-blur-md transition-all 
-              ${
-                activeTag === tag
-                  ? "bg-purple-700/70 text-white shadow-lg"
-                  : "bg-white/10 text-gray-200 hover:bg-purple-400/20"
-              }`}
+      {/* Dwie duże kategorie */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-14">
+        <button
+          type="button"
+          onClick={() => pickCategory("branding")}
+          className="
+            text-left rounded-2xl p-8 transition border
+            bg-white border-black/10 hover:shadow-lg
+            dark:bg-white/5 dark:border-white/10 dark:backdrop-blur-xl
+          "
+        >
+          <div className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">
+            {TAG_LABELS.branding[lang]}
+          </div>
+          <div className="text-slate-600 dark:text-white/70">
+            {lang === "pl"
+              ? "Identyfikacje, kampanie, key visuale, projekty marketingowe."
+              : "Visual identity, campaigns, key visuals and marketing assets."}
+          </div>
+          <div
+            className="
+              mt-5 inline-block text-sm font-medium px-4 py-2 rounded-lg
+              border border-black/10 text-slate-900
+              dark:border-white/15 dark:text-white
+            "
           >
-            {tag}
-          </button>
-        ))}
+            {lang === "pl" ? "Pokaż projekty" : "Show projects"}
+          </div>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => pickCategory("illustration")}
+          className="
+            text-left rounded-2xl p-8 transition border
+            bg-white border-black/10 hover:shadow-lg
+            dark:bg-white/5 dark:border-white/10 dark:backdrop-blur-xl
+          "
+        >
+          <div className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">
+            {TAG_LABELS.illustration[lang]}
+          </div>
+          <div className="text-slate-600 dark:text-white/70">
+            {lang === "pl"
+              ? "Ilustracje autorskie, fantasy, prace koncepcyjne i postacie."
+              : "Personal illustrations, fantasy pieces, concept work and characters."}
+          </div>
+          <div
+            className="
+              mt-5 inline-block text-sm font-medium px-4 py-2 rounded-lg
+              border border-black/10 text-slate-900
+              dark:border-white/15 dark:text-white
+            "
+          >
+            {lang === "pl" ? "Pokaż ilustracje" : "Show illustrations"}
+          </div>
+        </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      {/* Tagi */}
+      <div className="flex flex-wrap gap-3 justify-center mb-12">
+        {TAGS.map((tagId) => {
+          const isActive = activeTag === tagId;
+          return (
+            <button
+              key={tagId}
+              onClick={() => setActiveTag(tagId)}
+              className={`
+                px-5 py-2 rounded-xl border transition
+                ${
+                  isActive
+                    ? "bg-black text-white border-black/20 dark:bg-white dark:text-black dark:border-white/20"
+                    : "bg-white border-black/10 text-slate-700 hover:border-black/20 dark:bg-white/5 dark:border-white/10 dark:text-white/80 dark:hover:border-white/20"
+                }
+              `}
+            >
+              {TAG_LABELS[tagId][lang]}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Grid */}
+      <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {filteredProjects.map((project) => (
           <ProjectCard
             key={project.id}
-            {...project}
+            project={project}
+            lang={lang}
             onClick={() => setSelectedProject(project)}
           />
         ))}
       </div>
 
+      {/* Modal (scroll + wiele obrazów) */}
       {selectedProject && (
         <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-6"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-6"
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center relative"
+            className="
+              overflow-hidden max-w-5xl w-full max-h-[90vh] flex flex-col relative rounded-2xl border
+              bg-white border-black/10
+              dark:bg-[#12161c] dark:border-white/10
+            "
             onClick={(e) => e.stopPropagation()}
           >
+            {/* MEDIA */}
             {selectedProject.video ? (
               <video
                 src={selectedProject.video}
                 controls
                 autoPlay
-                className="max-w-full max-h-[80vh] object-contain rounded-t-2xl"
+                className="w-full max-h-[75vh] object-contain bg-black/5 dark:bg-black/30"
               />
-            ) : selectedProject.image ? (
-              <div className="flex items-center justify-center w-full h-full max-h-[80vh] bg-black/30">
-                <Image
-                  src={selectedProject.image}
-                  alt={selectedProject.title}
-                  width={1200}
-                  height={800}
-                  className="max-w-full max-h-[80vh] object-contain rounded-t-2xl transition-transform duration-500"
-                />
+            ) : selectedProject.images?.length ? (
+              <div className="w-full max-h-[75vh] overflow-y-auto p-6 space-y-6 bg-black/5 dark:bg-black/30">
+                {selectedProject.images.map((src, i) => (
+                  <Image
+                    key={src + i}
+                    src={src}
+                    alt={`${lang === "en"
+                      ? selectedProject.titleEn ?? selectedProject.title
+                      : selectedProject.title} ${i + 1}`}
+                    width={1600}
+                    height={1200}
+                    className="w-full h-auto object-contain rounded-lg"
+                  />
+                ))}
               </div>
             ) : null}
 
-            <div className="p-6 text-gray-100 w-full overflow-y-auto max-h-[30vh]">
-              <h3 className="text-2xl font-bold text-emerald-300 mb-3">
-                {selectedProject.title}
+            {/* TEXT */}
+            <div className="p-6 overflow-y-auto">
+              <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-3">
+                {lang === "en"
+                  ? selectedProject.titleEn ?? selectedProject.title
+                  : selectedProject.title}
               </h3>
-              <p className="text-gray-300 leading-relaxed mb-4">
-                {selectedProject.description}
+
+              <p className="text-slate-600 dark:text-white/70 leading-relaxed mb-4">
+                {lang === "en"
+                  ? selectedProject.descriptionEn ?? selectedProject.description
+                  : selectedProject.description}
               </p>
+
               {selectedProject.link && (
                 <Link
                   href={selectedProject.link}
                   target="_blank"
-                  className="mt-2 inline-block bg-purple-700/70 hover:bg-purple-700 text-white text-sm px-4 py-2 rounded-md transition"
+                  className="
+                    inline-block text-sm font-medium px-4 py-2 rounded-lg transition
+                    bg-black text-white hover:bg-black/90
+                    dark:bg-white dark:text-black dark:hover:bg-white/90
+                  "
                 >
-                  Otwórz projekt
+                  {lang === "pl" ? "Otwórz projekt" : "Open project"}
                 </Link>
               )}
             </div>

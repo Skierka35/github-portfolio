@@ -1,41 +1,37 @@
 @import "tailwindcss";
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 0.2; }
+:root {
+  --bg: #F7F7F5;
+  --text: #1A1A1A;
+  --text-muted: #5C5C5C;
+  --accent: #1F3A5F;
+  --border: #E5E5E5;
 }
 
-.animate-twinkle {
-  animation-name: twinkle;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-}
-
-@keyframes cloud {
-  0% {
-    transform: translateX(0) scale(1);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.15; /* fade in */
-  }
-  90% {
-    opacity: 0.15;
-  }
-  100% {
-    transform: translateX(-150px) scale(1.05);
-    opacity: 0; /* fade out */
-  }
-}
-
-.animate-cloud {
-  animation-name: cloud;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
+.dark {
+  --bg: #0E1116;
+  --text: #F2F2F2;
+  --text-muted: #A0A0A0;
+  --accent: #3E6BA8;
+  --border: #1E1E1E;
 }
 
 body {
-  margin: 0;
-  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background: #f7f7f5;
+  color: #121212;
+}
+
+.dark body {
+  background: #0e1116;
+  color: #f2f2f2;
+}

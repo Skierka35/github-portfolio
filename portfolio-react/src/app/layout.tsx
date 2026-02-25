@@ -1,12 +1,15 @@
-import './globals.css';
-import Navbar from './components/header';
+import "./globals.css";
+import { LanguageProvider } from "./components/languageProvider";
+import Header from "./components/header"; // jeśli header jest globalny
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pl">
-      <body className="bg-red-50 text-gray-900">
-        <Navbar />
-        <main className="p-6">{children}</main>
+      <body>
+        <LanguageProvider>
+          <Header />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

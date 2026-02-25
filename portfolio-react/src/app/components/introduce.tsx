@@ -2,25 +2,59 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ImageOnScroll from '../components/imageAnimation';
+import { useLang } from '../components/languageProvider';
 
 export default function Introduce() {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const { lang } = useLang();
 
-  const sections = [
-    {
-      title: 'Co robię:',
-      text: 'Jestem absolwentką wyższej szkoły informatycznej ze specjalizacją w grafice komputerowej. Obecnie koncentruję się na rozwoju moich umiejętności designu, łącząc wiedzę techniczną z estetyką i dbałością o doświadczenie użytkownika.',
+  const content = {
+    pl: {
+      heading: "O mnie",
+      sections: [
+        {
+          title: "Czym się zajmuję",
+          text: "Tworzę projekty graficzne i ilustracje, łącząc estetykę z funkcjonalnością. Realizuję identyfikacje wizualne, materiały reklamowe oraz ilustracje digitalowe - od klimatycznych scen fantasy po projekty o charakterze komercyjnym.",
+        },
+        {
+          title: "Specjalizacja",
+          text: "Szczególnie interesuje mnie ilustracja koncepcyjna, character design oraz budowanie nastroju poprzez światło i kolor. W projektach brandingowych skupiam się na spójności wizualnej i klarownej komunikacji marki.",
+        },
+        {
+          title: "Jak pracuję",
+          text: "Łączę zaplecze techniczne z wrażliwością wizualną. Dbam o detale, kompozycję i czytelność przekazu. Lubię rozwijać pomysł od szkicu aż do finalnej, dopracowanej formy.",
+        },
+        {
+          title: "Poza projektowaniem",
+          text: "W wolnym czasie rozwijam swoje umiejętności rysunkowe, tworzę autorskie ilustracje oraz eksploruję temat concept artu. Inspirują mnie gry, literatura fantasy i wizualny storytelling.",
+        },
+      ],
     },
-    {
-      title: 'Kim jestem:',
-      text: 'Jestem osobą kreatywną, empatyczną, otwartą na nowe doświadczenia. Lubię działać, stawiać sobie cele i konsekwentnie je realizować. Wyzwania lub porażki traktuję jako okazję do nauki oraz rozwoju.',
+    en: {
+      heading: "About me",
+      sections: [
+        {
+          title: "What I do",
+          text: "I create graphic design projects and digital illustrations, combining aesthetics with functionality. I work on visual identities, marketing materials and digital illustrations - from atmospheric fantasy scenes to commercial visual projects.",
+        },
+        {
+          title: "Specialization",
+          text: "I am particularly interested in concept illustration, character design and building mood through light and color. In branding projects, I focus on visual consistency and clear brand communication.",
+        },
+        {
+          title: "How I work",
+          text: "I combine technical knowledge with visual sensitivity. I pay attention to detail, composition and clarity of message. I enjoy developing ideas from initial sketches to refined final visuals.",
+        },
+        {
+          title: "Beyond design",
+          text: "In my free time, I develop my drawing skills, create personal illustrations and explore concept art. I am inspired by games, fantasy literature and visual storytelling.",
+        },
+      ],
     },
-    {
-      title: 'Zainteresowania:',
-      text: 'Interesuję się rysunkiem klasycznym i digitalowym. Chętnie gotuję dla siebie oraz bliskich, interesuje mnie temat zdrowego odżywiania. W wolnych chwilach czytam książki fantasy oraz gram w gry komputerowe.',
-    },
-  ];
+  } as const;
+
+  const t = content[lang];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,22 +70,32 @@ export default function Introduce() {
   return (
     <section
       ref={ref}
-      className={`max-w-6xl mx-auto px-6 md:px-10 py-16 flex flex-col md:flex-row items-center gap-14 
+      className={`w-full flex flex-col md:flex-row items-center gap-14 
       transition-all duration-1000 ease-in-out 
       ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
-      <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-10 w-full flex flex-col md:flex-row items-center gap-14">
+      <div
+        className="
+          w-full flex flex-col md:flex-row items-center gap-14 p-10
 
-        <div className="md:w-2/3 text-gray-100">
-          <h2 className="text-3xl font-bold mb-6 text-purple-500 drop-shadow-md">
-            O mnie
+          bg-white border-black/10
+          dark:bg-white/5 dark:border-white/10
+          dark:backdrop-blur-xl
+        "
+      >
+        {/* TEXT */}
+        <div className="md:w-2/3">
+          <h2 className="text-3xl font-semibold mb-8 text-slate-900 dark:text-slate-100">
+            {t.heading}
           </h2>
 
-          <div className="space-y-5">
-            {sections.map((sec, idx) => (
+          <div className="space-y-8">
+            {t.sections.map((sec, idx) => (
               <div key={idx}>
-                <h3 className="text-lg text-emerald-300 font-semibold mb-2">{sec.title}</h3>
-                <p className="text-gray-200/90 leading-relaxed text-justify tracking-wide mb-6">
+                <h3 className="text-sm uppercase tracking-wide font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                  {sec.title}
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
                   {sec.text}
                 </p>
               </div>
@@ -59,10 +103,11 @@ export default function Introduce() {
           </div>
         </div>
 
+        {/* IMAGE */}
         <div className="md:w-1/3 flex justify-center">
-          <div className="relative group flex justify-center items-center">
-            <div className="absolute -inset-4 bg-purple-500/20 blur-3xl opacity-50 transition-opacity rounded-2xl"></div>
-            <div className="overflow-hidden rounded-2xl shadow-lg transform group-hover:scale-[1.03] transition-transform duration-500">
+          <div className="relative flex justify-center items-center">
+            <div className="absolute -inset-6 bg-indigo-500/10 blur-3xl opacity-0 dark:opacity-60 transition-opacity rounded-2xl" />
+            <div className="overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 shadow-lg">
               <div className="w-auto max-h-[420px]">
                 <ImageOnScroll />
               </div>

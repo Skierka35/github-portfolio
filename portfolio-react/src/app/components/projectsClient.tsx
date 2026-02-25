@@ -1,12 +1,7 @@
-import { Suspense } from "react";
-import ProjectsClient from "./projectsClient";
+"use client";
 
-export default function ProjectsPage() {
-  return (
-    <section className="relative min-h-screen p-6">
-      <Suspense fallback={<div className="py-20 text-center">Loading…</div>}>
-        <ProjectsClient />
-      </Suspense>
-    </section>
-  );
+import ProjectGallery from "../components/projectGallery";
+
+export default function ProjectsClient() {
+  return <ProjectGallery />;
 }

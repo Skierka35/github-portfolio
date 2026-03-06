@@ -4,13 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import {
-  PROJECTS,
-  TAGS,
-  TAG_LABELS,
-  type Project,
-  type TagId,
-} from "../components/projects";
+import { PROJECTS, TAGS, TAG_LABELS, type Project, type TagId } from "../components/projects";
 import { useLang } from "../components/languageProvider";
 
 function ProjectCard({
@@ -25,10 +19,7 @@ function ProjectCard({
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const title = lang === "en" ? project.titleEn ?? project.title : project.title;
-  const description =
-    lang === "en"
-      ? project.descriptionEn ?? project.description
-      : project.description;
+  const description = lang === "en" ? project.descriptionEn ?? project.description : project.description;
 
   const cover = project.images?.[0];
 
@@ -64,13 +55,13 @@ function ProjectCard({
           <Image
             src={cover}
             alt={title}
-            width={900}
-            height={600}
+            width={1200}
+            height={800}
             className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-slate-500 dark:text-white/60">
-            {lang === "pl" ? "Brak miniatury" : "No thumbnail"}
+            {lang === "pl" ? "Brak podglądu" : "No preview"}
           </div>
         )}
       </div>
@@ -107,7 +98,191 @@ function ProjectCard({
   );
 }
 
-export default function ProjectGallery() {
+function ProjectModal({
+  project,
+  lang,
+  onClose,
+}: {
+  project: Project;
+  lang: "pl" | "en";
+  onClose: () => void;
+}) {
+  const title = lang === "en" ? project.titleEn ?? project.title : project.title;
+  const description =
+    lang === "en" ? project.descriptionEn ?? project.description : project.description;
+
+  const images = project.images ?? [];
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // ESC to close
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") setActiveIndex((i) => Math.max(0, i - 1));
+      if (e.key === "ArrowRight") setActiveIndex((i) => Math.min(images.length - 1, i + 1));
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [images.length, onClose]);
+
+  const activeImage = images[activeIndex];
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm p-4 md:p-8 flex items-center justify-center"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="
+          w-full max-w-6xl max-h-[90vh] overflow-hidden rounded-2xl border
+          bg-white border-black/10
+          dark:bg-[#12161c] dark:border-white/10
+          grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr]
+        "
+      >
+        {/* LEFT: Gallery */}
+        <div className="min-h-[320px] lg:min-h-0 border-b lg:border-b-0 lg:border-r border-black/10 dark:border-white/10">
+          {/* big preview */}
+          <div className="relative w-full h-[46vh] lg:h-[90vh] max-h-[520px] lg:max-h-none bg-black/5 dark:bg-black/30">
+            {project.video ? (
+              <video
+                src={project.video}
+                controls
+                autoPlay
+                className="w-full h-full object-contain"
+              />
+            ) : activeImage ? (
+              <Image
+                src={activeImage}
+                alt={title}
+                fill
+                sizes="(min-width: 1024px) 60vw, 100vw"
+                className="object-contain"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-slate-500 dark:text-white/60">
+                {lang === "pl" ? "Brak podglądu" : "No preview"}
+              </div>
+            )}
+          </div>
+
+          {/* thumbs strip */}
+          {images.length > 1 && !project.video && (
+            <div className="px-4 py-4">
+              <div className="text-xs uppercase tracking-wide text-slate-500 dark:text-white/60 mb-3">
+                {lang === "pl" ? "Podglądy" : "Previews"}
+              </div>
+
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {images.map((src, idx) => {
+                  const isActive = idx === activeIndex;
+                  return (
+                    <button
+                      key={src}
+                      type="button"
+                      onClick={() => setActiveIndex(idx)}
+                      className={`
+                        relative shrink-0 w-24 h-16 rounded-lg overflow-hidden border transition
+                        ${isActive
+                          ? "border-black/40 dark:border-white/40"
+                          : "border-black/10 hover:border-black/25 dark:border-white/10 dark:hover:border-white/25"}
+                      `}
+                      aria-label={`preview ${idx + 1}`}
+                    >
+                      <Image
+                        src={src}
+                        alt=""
+                        fill
+                        sizes="96px"
+                        className="object-cover"
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* RIGHT: Text */}
+        <aside className="p-6 lg:p-8 overflow-y-auto max-h-[90vh]">
+          <div className="flex items-start justify-between gap-4">
+            <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
+              {title}
+            </h3>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="
+                shrink-0 rounded-lg border px-3 py-2 text-sm transition
+                border-black/10 hover:border-black/25
+                dark:border-white/10 dark:hover:border-white/25
+                text-slate-700 dark:text-white/80
+              "
+            >
+              {lang === "pl" ? "Zamknij" : "Close"}
+            </button>
+          </div>
+
+          <p className="mt-4 text-slate-600 dark:text-white/70 leading-relaxed">
+            {description}
+          </p>
+
+          {/* tags */}
+          <div className="mt-5 flex flex-wrap gap-2">
+            {project.tags.map((t) => (
+              <span
+                key={t}
+                className="
+                  px-3 py-1 rounded-lg text-xs border
+                  border-black/10 bg-black/5 text-slate-700
+                  dark:border-white/10 dark:bg-white/10 dark:text-white/80
+                "
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
+          {/* internal case study link */}
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href={`/projects/${project.slug}`}
+              className="
+                inline-block px-5 py-3 rounded-lg font-medium transition
+                bg-black text-white hover:bg-black/90
+                dark:bg-white dark:text-black dark:hover:bg-white/90
+              "
+            >
+              {lang === "pl" ? "Zobacz opis projektu" : "View case study"}
+            </Link>
+
+            {project.link && (
+              <Link
+                href={project.link}
+                target="_blank"
+                className="
+                  inline-block px-5 py-3 rounded-lg font-medium transition border
+                  border-black/15 text-slate-900 hover:border-black/30
+                  dark:border-white/15 dark:text-white dark:hover:border-white/30
+                "
+              >
+                {lang === "pl" ? "Link zewnętrzny" : "External link"}
+              </Link>
+            )}
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+export default function Portfolio() {
   const { lang } = useLang();
   const searchParams = useSearchParams();
 
@@ -115,14 +290,12 @@ export default function ProjectGallery() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const gridRef = useRef<HTMLDivElement | null>(null);
 
-  // Czytanie tagu z URL: /projects?tag=illustration
+  // /projects?tag=branding
   useEffect(() => {
     const tagFromUrl = searchParams.get("tag") as TagId | null;
     if (tagFromUrl && TAGS.includes(tagFromUrl)) {
       setActiveTag(tagFromUrl);
-      setTimeout(() => {
-        gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 80);
+      setTimeout(() => gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
@@ -132,18 +305,11 @@ export default function ProjectGallery() {
     return PROJECTS.filter((p) => p.tags.includes(activeTag));
   }, [activeTag]);
 
-  const pickCategory = (tag: TagId) => {
-    setActiveTag(tag);
-    setTimeout(() => {
-      gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 80);
-  };
-
-  const heading = lang === "pl" ? "Moje projekty" : "My projects";
+  const heading = lang === "pl" ? "Projekty marketingowe" : "Marketing projects";
   const subtitle =
     lang === "pl"
-      ? "Wybierz kategorię albo przefiltruj tagami."
-      : "Choose a category or filter by tags.";
+      ? "Branding, kampanie, materiały do social mediów i inne realizacje."
+      : "Branding, campaigns, social assets and more.";
 
   return (
     <section className="py-20 px-6 max-w-7xl mx-auto">
@@ -154,66 +320,6 @@ export default function ProjectGallery() {
         {subtitle}
       </p>
 
-      {/* Dwie duże kategorie */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-14">
-        <button
-          type="button"
-          onClick={() => pickCategory("branding")}
-          className="
-            text-left rounded-2xl p-8 transition border
-            bg-white border-black/10 hover:shadow-lg
-            dark:bg-white/5 dark:border-white/10 dark:backdrop-blur-xl
-          "
-        >
-          <div className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">
-            {TAG_LABELS.branding[lang]}
-          </div>
-          <div className="text-slate-600 dark:text-white/70">
-            {lang === "pl"
-              ? "Identyfikacje, kampanie, key visuale, projekty marketingowe."
-              : "Visual identity, campaigns, key visuals and marketing assets."}
-          </div>
-          <div
-            className="
-              mt-5 inline-block text-sm font-medium px-4 py-2 rounded-lg
-              border border-black/10 text-slate-900
-              dark:border-white/15 dark:text-white
-            "
-          >
-            {lang === "pl" ? "Pokaż projekty" : "Show projects"}
-          </div>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => pickCategory("illustration")}
-          className="
-            text-left rounded-2xl p-8 transition border
-            bg-white border-black/10 hover:shadow-lg
-            dark:bg-white/5 dark:border-white/10 dark:backdrop-blur-xl
-          "
-        >
-          <div className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-2">
-            {TAG_LABELS.illustration[lang]}
-          </div>
-          <div className="text-slate-600 dark:text-white/70">
-            {lang === "pl"
-              ? "Ilustracje autorskie, fantasy, prace koncepcyjne i postacie."
-              : "Personal illustrations, fantasy pieces, concept work and characters."}
-          </div>
-          <div
-            className="
-              mt-5 inline-block text-sm font-medium px-4 py-2 rounded-lg
-              border border-black/10 text-slate-900
-              dark:border-white/15 dark:text-white
-            "
-          >
-            {lang === "pl" ? "Pokaż ilustracje" : "Show illustrations"}
-          </div>
-        </button>
-      </div>
-
-      {/* Tagi */}
       <div className="flex flex-wrap gap-3 justify-center mb-12">
         {TAGS.map((tagId) => {
           const isActive = activeTag === tagId;
@@ -223,11 +329,9 @@ export default function ProjectGallery() {
               onClick={() => setActiveTag(tagId)}
               className={`
                 px-5 py-2 rounded-xl border transition
-                ${
-                  isActive
-                    ? "bg-black text-white border-black/20 dark:bg-white dark:text-black dark:border-white/20"
-                    : "bg-white border-black/10 text-slate-700 hover:border-black/20 dark:bg-white/5 dark:border-white/10 dark:text-white/80 dark:hover:border-white/20"
-                }
+                ${isActive
+                  ? "bg-black text-white border-black/20 dark:bg-white dark:text-black dark:border-white/20"
+                  : "bg-white border-black/10 text-slate-700 hover:border-black/20 dark:bg-white/5 dark:border-white/10 dark:text-white/80 dark:hover:border-white/20"}
               `}
             >
               {TAG_LABELS[tagId][lang]}
@@ -236,7 +340,6 @@ export default function ProjectGallery() {
         })}
       </div>
 
-      {/* Grid */}
       <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {filteredProjects.map((project) => (
           <ProjectCard
@@ -248,7 +351,6 @@ export default function ProjectGallery() {
         ))}
       </div>
 
-      {/* Modal (scroll + wiele obrazów) */}
       {selectedProject && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-6"
@@ -268,36 +370,28 @@ export default function ProjectGallery() {
                 src={selectedProject.video}
                 controls
                 autoPlay
-                className="w-full max-h-[75vh] object-contain bg-black/5 dark:bg-black/30"
+                className="max-w-full max-h-[80vh] object-contain"
               />
-            ) : selectedProject.images?.length ? (
-              <div className="w-full max-h-[75vh] overflow-y-auto p-6 space-y-6 bg-black/5 dark:bg-black/30">
-                {selectedProject.images.map((src, i) => (
-                  <Image
-                    key={src + i}
-                    src={src}
-                    alt={`${lang === "en"
-                      ? selectedProject.titleEn ?? selectedProject.title
-                      : selectedProject.title} ${i + 1}`}
-                    width={1600}
-                    height={1200}
-                    className="w-full h-auto object-contain rounded-lg"
-                  />
-                ))}
+            ) : selectedProject.images?.[0] ? (
+              <div className="flex items-center justify-center w-full max-h-[80vh] bg-black/5 dark:bg-black/30">
+                <Image
+                  src={selectedProject.images[0]}
+                  alt={lang === "en" ? (selectedProject.titleEn ?? selectedProject.title) : selectedProject.title}
+                  width={1600}
+                  height={1000}
+                  className="max-w-full max-h-[80vh] object-contain"
+                />
               </div>
             ) : null}
 
             {/* TEXT */}
             <div className="p-6 overflow-y-auto">
               <h3 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 mb-3">
-                {lang === "en"
-                  ? selectedProject.titleEn ?? selectedProject.title
-                  : selectedProject.title}
+                {lang === "en" ? (selectedProject.titleEn ?? selectedProject.title) : selectedProject.title}
               </h3>
-
               <p className="text-slate-600 dark:text-white/70 leading-relaxed mb-4">
                 {lang === "en"
-                  ? selectedProject.descriptionEn ?? selectedProject.description
+                  ? (selectedProject.descriptionEn ?? selectedProject.description)
                   : selectedProject.description}
               </p>
 

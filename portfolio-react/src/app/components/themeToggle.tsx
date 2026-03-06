@@ -1,38 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Sun, Moon } from "lucide-react";
 
 type Theme = "light" | "dark";
 
-function applyTheme(theme: Theme) {
-  const root = document.documentElement;
-  if (theme === "dark") root.classList.add("dark");
-  else root.classList.remove("dark");
-}
-
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("dark"); // domyślnie ciemny, zmień jeśli wolisz
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    const saved = (localStorage.getItem("theme") as Theme | null) ?? null;
-
-    if (saved === "light" || saved === "dark") {
-      setTheme(saved);
-      applyTheme(saved);
-      return;
-    }
-
-    // jeśli nie zapisano, weź preferencję systemu
-    const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? true;
-    const initial: Theme = prefersDark ? "dark" : "light";
+    const saved = (localStorage.getItem("theme") as Theme | null) ?? "light";
+    const initial: Theme = saved === "dark" ? "dark" : "light";
     setTheme(initial);
-    applyTheme(initial);
+    document.documentElement.classList.toggle("dark", initial === "dark");
   }, []);
 
   const toggle = () => {
     const next: Theme = theme === "dark" ? "light" : "dark";
     setTheme(next);
-    applyTheme(next);
+    document.documentElement.classList.toggle("dark", next === "dark");
     localStorage.setItem("theme", next);
   };
 
@@ -40,11 +26,17 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      className="px-4 py-2 rounded-lg text-sm border border-black/15 hover:border-black/30 transition
-                 dark:border-white/15 dark:hover:border-white/30"
-      aria-label="Przełącz tryb jasny i ciemny"
+      className="
+        p-2 rounded-lg border border-black/10 hover:bg-black/5
+        dark:border-white/10 dark:hover:bg-white/10
+      "
+      aria-label="Toggle theme"
     >
-      {theme === "dark" ? "Tryb jasny" : "Tryb ciemny"}
+      {theme === "dark" ? (
+        <Sun size={18} className="text-white" />
+      ) : (
+        <Moon size={18} className="text-black" />
+      )}
     </button>
   );
 }

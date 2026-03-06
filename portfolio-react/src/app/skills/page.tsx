@@ -1,16 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
 import { FaLinkedin, FaFacebookSquare, FaArtstation, FaGithub } from "react-icons/fa";
 import { useLang } from "../components/languageProvider";
 
-type Track = "branding" | "illustration";
-
 const profile = {
   name: "Julia Koszczoł",
-  titlePl: "Graphic designer ",
-  titleEn: "Graphic designer ",
+  titlePl: "Marketing / Branding Designer",
+  titleEn: "Marketing / Branding Designer",
   avatar: "/profile.png",
   cvLink:
     "https://www.canva.com/design/DAHAL5uNy6o/ww3Tvz56rwAgutYcS69E0Q/edit?utm_content=DAHAL5uNy6o&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
@@ -26,143 +23,90 @@ const TEXT = {
   pl: {
     pageTitle: "Umiejętności",
     cv: "Podgląd CV",
-    trackBranding: "Branding / reklama",
-    trackIllustration: "Ilustracja / concept art",
-    overview: "Czym się zajmuję",
+    overview: "Profil",
     workflow: "Proces współpracy",
     deliverables: "Co mogę dostarczyć",
     tools: "Narzędzia",
     languages: "Języki",
-    facts: {
-      a: "Branding, kampanie, key visuale, social packi",
-      b: "Ilustracje digitalowe, concept art, postacie i rekwizyty",
-      c: "Pliki gotowe do publikacji + mockupy + eksporty",
-    },
+    summary: [
+      "Branding i identyfikacje wizualne: logo, podstawy systemu, mini-guideline",
+      "Grafika marketingowa: kampanie, KV, social media packi, banery, layouty",
+      "Pliki gotowe do publikacji: formaty, eksporty, poprawna hierarchia i typografia",
+    ],
+    deliverablesList: [
+      "Key visual (KV) + layouty kampanii",
+      "Logo + podstawy identyfikacji (kolor, typografia, zasady)",
+      "Social media pack (posty, stories, cover, ads)",
+      "Banery i materiały digital (np. landing visuals)",
+      "DTP / materiały do druku (jeśli potrzebne): ulotka, plakat, roll-up",
+      "Mockupy + prezentacja projektu",
+    ],
+    toolsList: ["Adobe (PS/AI/ID)", "Figma", "Canva (szybkie wersje)", "Blender (mockupy / podglądy)"],
+    highlightsTitle: "Mocne strony",
+    highlights: [
+      "Kompozycja, typografia i hierarchia informacji",
+      "Spójność systemu (kolor, siatka, brand tone)",
+      "Przygotowanie plików pod formaty i publikację",
+    ],
     workflowSteps: [
-      { t: "1. Brief", d: "Zakres, formaty, referencje i deadline." },
-      { t: "2. Kierunek", d: "Moodboard / szkice / propozycja stylu." },
+      { t: "1. Brief", d: "Zakres, cel, formaty, referencje, deadline." },
+      { t: "2. Kierunek", d: "Moodboard / propozycja stylu i układu." },
       { t: "3. Iteracje", d: "Poprawki w uzgodnionej liczbie rund." },
-      { t: "4. Final", d: "Eksporty, wersje formatów i przygotowanie do publikacji." },
+      { t: "4. Final", d: "Eksporty, wersje formatów i komplet plików." },
     ],
     langs: [
       { name: "Polski (ojczysty)", level: "C2" },
-      { name: "Angielski (B2)", level: "B2" },
-      { name: "Niemiecki (A2)", level: "A2" },
+      { name: "Angielski", level: "B2" },
+      { name: "Niemiecki", level: "A2" },
     ],
   },
   en: {
     pageTitle: "Skills",
     cv: "View CV",
-    trackBranding: "Branding / advertising",
-    trackIllustration: "Illustration / concept art",
-    overview: "Overview",
+    overview: "Profile",
     workflow: "Workflow",
     deliverables: "What I can deliver",
     tools: "Tools",
     languages: "Languages",
-    facts: {
-      a: "Brand identity, campaigns, key visuals, social packs",
-      b: "Digital illustration, concept art, characters and props",
-      c: "Publication-ready files + mockups + exports",
-    },
+    summary: [
+      "Branding and visual identity: logo, basic system, mini guidelines",
+      "Marketing design: campaigns, key visuals, social packs, banners, layouts",
+      "Publication-ready files: formats, exports, clean hierarchy and typography",
+    ],
+    deliverablesList: [
+      "Key visuals (KV) + campaign layouts",
+      "Logo + basic identity system (color, type, rules)",
+      "Social media pack (posts, stories, cover, ads)",
+      "Digital assets (banners, landing visuals)",
+      "Print/DTP (if needed): flyer, poster, roll-up",
+      "Mockups + project presentation",
+    ],
+    toolsList: ["Adobe (PS/AI/ID)", "Figma", "Canva (fast iterations)", "Blender (mockups / previews)"],
+    highlightsTitle: "Highlights",
+    highlights: [
+      "Composition, typography and information hierarchy",
+      "System consistency (color, grid, brand tone)",
+      "Export and production-ready formats",
+    ],
     workflowSteps: [
-      { t: "1. Brief", d: "Scope, formats, references and deadline." },
-      { t: "2. Direction", d: "Moodboard / sketches / style proposal." },
-      { t: "3. Iterations", d: "Revisions in an agreed number of rounds." },
-      { t: "4. Final", d: "Exports, format versions and delivery." },
+      { t: "1. Brief", d: "Scope, goal, formats, references, deadline." },
+      { t: "2. Direction", d: "Moodboard / style and layout proposal." },
+      { t: "3. Iterations", d: "Revisions within an agreed number of rounds." },
+      { t: "4. Final", d: "Exports, format variations and file delivery." },
     ],
     langs: [
       { name: "Polish (native)", level: "C2" },
-      { name: "English (B2)", level: "B2" },
-      { name: "German (A2)", level: "A2" },
+      { name: "English", level: "B2" },
+      { name: "German", level: "A2" },
     ],
   },
 } as const;
-
-const TRACKS: Record<
-  Track,
-  {
-    deliverablesPl: string[];
-    deliverablesEn: string[];
-    toolsPl: string[];
-    toolsEn: string[];
-    highlightsPl: string[];
-    highlightsEn: string[];
-  }
-> = {
-  branding: {
-    deliverablesPl: [
-      "Key visual (KV) i layouty kampanii",
-      "Identyfikacja wizualna (logo + podstawy systemu)",
-      "Materiały digital (social, banery, landing visuals)",
-      "Mockupy i prezentacja projektu",
-    ],
-    deliverablesEn: [
-      "Key visuals and campaign layouts",
-      "Visual identity (logo + basic system)",
-      "Digital assets (social, banners, landing visuals)",
-      "Mockups and project presentation",
-    ],
-    toolsPl: ["Adobe (PS/AI/ID)", "Figma", "Canva", "Blender (mockupy)"],
-    toolsEn: ["Adobe (PS/AI/ID)", "Figma", "Canva", "Blender (mockups)"],
-    highlightsPl: [
-      "Kompozycja, typografia, hierarchia informacji",
-      "Spójność systemu (kolor/siatka/brand tone)",
-      "Przygotowanie do publikacji w formatach",
-    ],
-    highlightsEn: [
-      "Composition, typography, information hierarchy",
-      "System consistency (color/grid/brand tone)",
-      "Export and production-ready formats",
-    ],
-  },
-  illustration: {
-    deliverablesPl: [
-      "Ilustracje digital (okładki, sceny, pojedyncze postacie)",
-      "Character design: warianty, stroje, detale",
-      "Concept art: propsy, elementy świata, mini-briefy",
-      "Pliki w wysokiej rozdzielczości + wersje do social",
-    ],
-    deliverablesEn: [
-      "Digital illustrations (covers, scenes, single characters)",
-      "Character design: variants, outfits, details",
-      "Concept art: props, world elements, mini-briefs",
-      "High-res files + social-ready versions",
-    ],
-    toolsPl: ["Photoshop / Procreate (jeśli używasz)", "Figma (prezentacja)", "Blender (referencje)"],
-    toolsEn: ["Photoshop / Procreate (if used)", "Figma (presentation)", "Blender (references)"],
-    highlightsPl: [
-      "Silhouette & czytelność formy",
-      "Światło i wartości (value), czytelny render",
-      "Spójność stylu pod brief / uniwersum",
-    ],
-    highlightsEn: [
-      "Silhouette & shape readability",
-      "Light and values (value), clean rendering",
-      "Style consistency for a brief / universe",
-    ],
-  },
-};
 
 export default function SkillsPage() {
   const { lang } = useLang();
   const t = TEXT[lang];
 
-  const [track, setTrack] = useState<Track>("branding");
-
   const title = lang === "en" ? profile.titleEn : profile.titlePl;
-
-  const deliverables = useMemo(() => {
-    return lang === "en" ? TRACKS[track].deliverablesEn : TRACKS[track].deliverablesPl;
-  }, [lang, track]);
-
-  const tools = useMemo(() => {
-    return lang === "en" ? TRACKS[track].toolsEn : TRACKS[track].toolsPl;
-  }, [lang, track]);
-
-  const highlights = useMemo(() => {
-    return lang === "en" ? TRACKS[track].highlightsEn : TRACKS[track].highlightsPl;
-  }, [lang, track]);
 
   return (
     <section className="min-h-screen w-full">
@@ -224,54 +168,32 @@ export default function SkillsPage() {
             >
               {t.cv}
             </a>
-
-            {/* Segmented control */}
-            <div
-              className="
-                w-full max-w-xs mt-2 grid grid-cols-2 rounded-xl border border-black/10 overflow-hidden
-                dark:border-white/10
-              "
-            >
-              <button
-                type="button"
-                onClick={() => setTrack("branding")}
-                className={`
-                  px-4 py-3 text-sm font-medium transition
-                  ${track === "branding"
-                    ? "bg-black text-white dark:bg-white dark:text-black"
-                    : "bg-white text-slate-700 hover:bg-black/5 dark:bg-transparent dark:text-white/80 dark:hover:bg-white/10"}
-                `}
-              >
-                {t.trackBranding}
-              </button>
-              <button
-                type="button"
-                onClick={() => setTrack("illustration")}
-                className={`
-                  px-4 py-3 text-sm font-medium transition
-                  ${track === "illustration"
-                    ? "bg-black text-white dark:bg-white dark:text-black"
-                    : "bg-white text-slate-700 hover:bg-black/5 dark:bg-transparent dark:text-white/80 dark:hover:bg-white/10"}
-                `}
-              >
-                {t.trackIllustration}
-              </button>
-            </div>
           </aside>
 
           {/* RIGHT */}
           <main className="lg:col-span-2 p-4 space-y-10">
             <Section title={t.overview}>
               <ul className="space-y-2 text-slate-700 dark:text-white/80">
-                <li>• {t.facts.a}</li>
-                <li>• {t.facts.b}</li>
-                <li>• {t.facts.c}</li>
+                {t.summary.map((x) => (
+                  <li key={x}>• {x}</li>
+                ))}
               </ul>
+
+              <div className="mt-5">
+                <div className="text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">
+                  {t.highlightsTitle}
+                </div>
+                <ul className="space-y-1 text-slate-700 dark:text-white/80">
+                  {t.highlights.map((x) => (
+                    <li key={x}>• {x}</li>
+                  ))}
+                </ul>
+              </div>
             </Section>
 
             <Section title={t.deliverables}>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {deliverables.map((x) => (
+                {t.deliverablesList.map((x) => (
                   <li
                     key={x}
                     className="
@@ -308,7 +230,7 @@ export default function SkillsPage() {
 
             <Section title={t.tools}>
               <div className="flex flex-wrap gap-2">
-                {tools.map((item) => (
+                {t.toolsList.map((item) => (
                   <span
                     key={item}
                     className="
@@ -320,17 +242,6 @@ export default function SkillsPage() {
                     {item}
                   </span>
                 ))}
-              </div>
-
-              <div className="mt-4">
-                <div className="text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">
-                  {lang === "pl" ? "Mocne strony" : "Highlights"}
-                </div>
-                <ul className="space-y-1 text-slate-700 dark:text-white/80">
-                  {highlights.map((x) => (
-                    <li key={x}>• {x}</li>
-                  ))}
-                </ul>
               </div>
             </Section>
 

@@ -2,23 +2,23 @@
 
 import Introduce from "./components/introduce";
 import ContactPage from "./components/contact";
-import HomeLatestIllustrations from "./components/homeLatestProjects";
-import ThemeToggle from "./components/themeToggle";
+import HomeLatestProjects from "./components/homeLatestProjects";
 import { useLang } from "./components/languageProvider";
+import Link from "next/link";
 
 const TEXT = {
   pl: {
     subtitle:
-      "Graphic designer & ilustratorka. Branding, kampanie i ilustracje digitalowe.",
-    contactBtn: "Kontakt",
-    projectsBtn: "Projekty",
+      "Grafika marketingowa: branding, kampanie, social media, materiały sprzedażowe i DTP.",
+    ctaPrimary: "Kontakt",
+    ctaSecondary: "Zobacz projekty marketingowe",
     contactTitle: "Skontaktuj się ze mną",
   },
   en: {
     subtitle:
-      "Graphic designer & illustrator. Branding, campaigns and digital illustration.",
-    contactBtn: "Contact",
-    projectsBtn: "Projects",
+      "Marketing design: branding, campaigns, social media, sales assets and DTP.",
+    ctaPrimary: "Contact",
+    ctaSecondary: "View marketing projects",
     contactTitle: "Get in touch",
   },
 } as const;
@@ -29,50 +29,67 @@ export default function Home() {
 
   return (
     <main className="relative w-full">
-      {/* Top bar */}
-      <header className="w-full">
-        <div className="max-w-6xl mx-auto px-6 pt-6 flex items-center justify-end">
-          <ThemeToggle />
-        </div>
-      </header>
 
       <div className="max-w-6xl mx-auto px-6">
-        <section className="relative w-full overflow-hidden">
-          {/* Background image */}
+        {/* HERO */}
+        <section className="relative w-full overflow-hidden rounded-2xl">
           <div className="absolute inset-0 -z-10">
-            <img
-              src="/hero-bg.jpg"
-              alt=""
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-white/80 dark:bg-black/70 backdrop-blur-sm" />
+            <img src="/hero-bg.jpg" alt="" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-white/85 dark:bg-black/70 backdrop-blur-sm" />
           </div>
 
-          <div className="max-w-6xl mx-auto px-6 pt-24 pb-20">
+          <div className="px-6 md:px-10 pt-20 md:pt-24 pb-16 md:pb-20">
             <div className="max-w-3xl">
-              <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+              <p className="text-sm uppercase tracking-wider text-slate-500 dark:text-white/60">
+                Marketing Designer
+              </p>
+
+              <h1 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
                 Julia Koszczoł
               </h1>
 
-              <p className="mt-4 text-lg text-slate-700 dark:text-white/70">
-                Graphic designer & ilustratorka. Branding, kampanie i ilustracje digitalowe.
+              <p className="mt-5 text-lg text-slate-700 dark:text-white/70 leading-relaxed">
+                {t.subtitle}
               </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="#kontakt"
+                  className="
+                    px-5 py-3 rounded-lg transition text-sm font-medium
+                    bg-black text-white hover:bg-black/90
+                    dark:bg-white dark:text-black dark:hover:bg-white/90
+                  "
+                >
+                  {t.ctaPrimary}
+                </a>
+
+                <Link
+                  href="/projects?tag=branding"
+                  className="
+                    px-5 py-3 rounded-lg border transition text-sm font-medium
+                    border-black/15 hover:border-black/30 text-slate-900
+                    dark:border-white/15 dark:hover:border-white/30 dark:text-white
+                  "
+                >
+                  {t.ctaSecondary}
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
-
-        {/* O MNIE */}
-        <section className="py-16">
+        {/* ABOUT */}
+        <section className="py-20">
           <Introduce />
         </section>
 
-        {/* OSTATNIE ILUSTRACJE */}
-        <HomeLatestIllustrations />
+        {/* LATEST BRANDING */}
+        <HomeLatestProjects />
 
-        {/* KONTAKT */}
-        <section id="kontakt" className="py-16">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-8">
+        {/* CONTACT */}
+        <section id="kontakt" className="py-20">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-slate-900 dark:text-slate-100">
             {t.contactTitle}
           </h2>
           <ContactPage />

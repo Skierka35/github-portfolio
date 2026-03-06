@@ -3,14 +3,13 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X} from 'lucide-react';
 import { useLang } from './languageProvider';
 
 export default function Header() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  // LANGUAGE
   const { lang, toggleLang } = useLang();
 
   const isHome = pathname === '/';

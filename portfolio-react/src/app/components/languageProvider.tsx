@@ -31,7 +31,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const toggleLang = () => setLang(lang === "pl" ? "en" : "pl");
 
-  const value = useMemo(() => ({ lang, setLang, toggleLang }), [lang]);
+  const value = { lang, setLang, toggleLang };
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }

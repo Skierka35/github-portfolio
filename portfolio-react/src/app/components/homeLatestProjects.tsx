@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { PROJECTS, type Project, type TagId } from "../components/projects";
+import { useMemo, useState } from "react";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { PROJECTS, type TagId } from "../components/projects";
 import { useLang } from "../components/languageProvider";
 
-function getLatestByTag(tag: TagId, limit: number): Project[] {
-  return PROJECTS.filter((p) => p.tags.includes(tag))
+function getLatestByTag(tag: TagId, limit: number) {
+  return PROJECTS
+    .filter((project) => project.tags.includes(tag))
     .sort((a, b) => b.id - a.id)
     .slice(0, limit);
 }
@@ -14,10 +17,15 @@ function getLatestByTag(tag: TagId, limit: number): Project[] {
 const TEXT = {
   pl: {
     title: "Ostatnie projekty marketingowe",
-    subtitle: "Wybrane, najnowsze realizacje z obszaru brandingu i grafiki reklamowej.",
+    subtitle:
+      "Wybrane, najnowsze realizacje z obszaru brandingu i grafiki reklamowej.",
     allBranding: "Zobacz branding / marketing",
     allProjects: "Wszystkie projekty",
     noThumb: "Brak podglądu",
+    details: "Zobacz projekt",
+    previous: "Poprzedni",
+    next: "Następny",
+    category: "Branding / Marketing",
   },
   en: {
     title: "Latest marketing projects",
@@ -25,6 +33,10 @@ const TEXT = {
     allBranding: "View branding / marketing",
     allProjects: "All projects",
     noThumb: "No preview available",
+    details: "View project",
+    previous: "Previous",
+    next: "Next",
+    category: "Branding / Marketing",
   },
 } as const;
 
@@ -32,77 +44,145 @@ export default function HomeLatestProjects() {
   const { lang } = useLang();
   const t = TEXT[lang];
 
-  const latest = getLatestByTag("branding", 2);
+  const projects = useMemo(() => getLatestByTag("branding", 4), []);
+  const [current, setCurrent] = useState(0);
+
+  const total = projects.length;
+  const project = projects[current];
+
+  if (!project) return null;
+
+  const title = lang === "en" ? project.titleEn ?? project.title : project.title;
+  const description =
+    lang === "en"
+      ? project.descriptionEn ?? project.description
+      : project.description;
+
+  const cover = project.images?.[0];
+
+  const goToPrev = () => setCurrent((prev) => (prev - 1 + total) % total);
+  const goToNext = () => setCurrent((prev) => (prev + 1) % total);
 
   return (
     <section className="w-full py-20">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mb-14 text-center">
+          <h2 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 md:text-4xl">
             {t.title}
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto leading-relaxed text-slate-600 dark:text-white/70">
+          <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600 dark:text-white/70">
             {t.subtitle}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {latest.map((p) => {
-            const title = lang === "en" ? p.titleEn ?? p.title : p.title;
-            const description = lang === "en" ? p.descriptionEn ?? p.description : p.description;
+        <div className="relative">
+          {total > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={goToPrev}
+                aria-label={t.previous}
+                className="absolute left-3 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white/90 text-slate-900 shadow-md backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-black/70 dark:text-white md:flex"
+              >
+                <ChevronLeft size={20} />
+              </button>
 
-            const cover = p.images?.[0];
+              <button
+                type="button"
+                onClick={goToNext}
+                aria-label={t.next}
+                className="absolute right-3 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white/90 text-slate-900 shadow-md backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-black/70 dark:text-white md:flex"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </>
+          )}
 
-            return (
-              <article key={p.id} className="group">
-                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-xl border bg-white border-black/10 dark:bg-black/20 dark:border-white/10">
-                  {cover ? (
-                    <Image
-                      src={cover}
-                      alt={title}
-                      fill
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                      className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-slate-500 dark:text-white/60">
-                      {t.noThumb}
-                    </div>
-                  )}
+          <article className="grid items-stretch gap-6 md:grid-cols-[1.15fr_0.85fr]">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2rem] border border-black/10 bg-white shadow-sm dark:border-white/10 dark:bg-black/20">
+              {cover ? (
+                <Image
+                  src={cover}
+                  alt={title}
+                  fill
+                  sizes="(min-width: 768px) 60vw, 100vw"
+                  className="object-cover object-center"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-slate-500 dark:text-white/60">
+                  {t.noThumb}
                 </div>
+              )}
+            </div>
 
-                <div className="mt-6 text-center">
-                  <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-                    {title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-white/70">
-                    {description}
-                  </p>
+            <div className="flex flex-col justify-center rounded-[2rem] border border-black/5 bg-white p-8 shadow-sm dark:border-white/10 dark:bg-white/5">
+              <p className="text-sm uppercase tracking-[0.2em] text-slate-500 dark:text-white/50">
+                {t.category}
+              </p>
+
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 md:text-3xl">
+                {title}
+              </h3>
+
+              <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-white/70 md:text-base">
+                {description}
+              </p>
+
+              {project.tags?.length > 0 && (
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-black/10 px-3 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:text-slate-200"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-              </article>
-            );
-          })}
+              )}
+
+              <div className="mt-6">
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="inline-flex items-center gap-2 rounded-full bg-black px-5 py-3 text-sm font-medium text-white transition hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
+                >
+                  {t.details}
+                  <ExternalLink size={16} />
+                </Link>
+              </div>
+            </div>
+          </article>
+
+          {total > 1 && (
+            <div className="mt-8 flex items-center justify-center gap-2">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => setCurrent(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                  className={`h-2.5 rounded-full transition-all ${
+                    current === index
+                      ? "w-8 bg-slate-900 dark:bg-white"
+                      : "w-2.5 bg-slate-300 dark:bg-white/25"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="mt-14 flex justify-center gap-4 flex-wrap">
+        <div className="mt-14 flex flex-wrap justify-center gap-4">
           <Link
             href="/projects?tag=branding"
-            className="
-              px-6 py-3 rounded-lg border transition
-              border-black/15 hover:border-black/30 text-slate-900
-              dark:border-white/15 dark:hover:border-white/30 dark:text-white
-            "
+            className="rounded-full border border-black/15 px-6 py-3 text-slate-900 transition hover:border-black/30 dark:border-white/15 dark:text-white dark:hover:border-white/30"
           >
             {t.allBranding}
           </Link>
 
           <Link
             href="/projects"
-            className="
-              px-6 py-3 rounded-lg transition
-              bg-black text-white hover:bg-black/90
-              dark:bg-white dark:text-black dark:hover:bg-white/90
-            "
+            className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
           >
             {t.allProjects}
           </Link>

@@ -1,127 +1,149 @@
-'use client';
+"use client";
 
-import {useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Menu, X} from 'lucide-react';
-import { useLang } from './languageProvider';
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { useLang } from "./languageProvider";
 
 export default function Header() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-
   const { lang, toggleLang } = useLang();
 
-  const isHome = pathname === '/';
+  const isHome = pathname === "/";
 
   const toggleMenu = () => setIsOpen((v) => !v);
   const closeMenu = () => setIsOpen(false);
 
-  const navLinks = [
-    { href: '/skills', labelPl: 'Umiejętności', labelEn: 'Skills' },
-    { href: '/projects', labelPl: 'Projekty', labelEn: 'Projects' },
+  const homeLinks = [
+    { href: "#o-mnie", labelPl: "O mnie", labelEn: "About" },
+    { href: "#uslugi", labelPl: "Usługi", labelEn: "Services" },
+    { href: "#projekty", labelPl: "Projekty", labelEn: "Projects" },
+    { href: "#kontakt", labelPl: "Kontakt", labelEn: "Contact" },
   ];
 
-  const languageLabel = lang.toUpperCase(); // PL / EN
+  const externalLinks = [
+    { href: "/projects", labelPl: "Wszystkie projekty", labelEn: "All projects" },
+  ];
+
+  const languageLabel = lang.toUpperCase();
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
-        ${isHome ? 'backdrop-blur-md' : ''}
-        bg-white/80 dark:bg-black/70
-        border-b border-black/10 dark:border-white/10
-      `}
+      className={`fixed left-0 top-0 z-50 w-full border-b border-black/10 bg-white/75 transition-all duration-300 dark:border-white/10 dark:bg-black/60 ${
+        isHome ? "backdrop-blur-xl" : "backdrop-blur-md"
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between">
-        {/* LOGO */}
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-8">
         <Link href="/" onClick={closeMenu} className="flex items-center gap-2">
-          <span className="text-lg sm:text-xl font-semibold tracking-wide text-black dark:text-white hover:opacity-70 transition">
-            PORTFOLIO
+          <span className="text-lg font-semibold tracking-wide text-black transition hover:opacity-70 dark:text-white sm:text-xl">
+            JULIA KOSZCZOŁ
           </span>
         </Link>
 
-        {/* DESKTOP MENU */}
-        <div className="hidden md:flex items-center gap-8 ml-auto">
-          {navLinks.map((link) => {
-            const label = lang === 'pl' ? link.labelPl : link.labelEn;
+        <div className="hidden items-center gap-7 md:flex">
+          {isHome &&
+            homeLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-black transition hover:opacity-70 dark:text-white"
+              >
+                {lang === "pl" ? link.labelPl : link.labelEn}
+              </a>
+            ))}
 
-            return pathname === link.href ? (
+          {externalLinks.map((link) =>
+            pathname === link.href ? (
               <span
                 key={link.href}
-                className="text-sm font-medium text-black/50 dark:text-white/50 cursor-default"
+                className="cursor-default text-sm font-medium text-black/40 dark:text-white/40"
               >
-                {label}
+                {lang === "pl" ? link.labelPl : link.labelEn}
               </span>
             ) : (
-              <Link key={link.href} href={link.href} onClick={closeMenu}>
-                <span className="text-sm font-medium text-black dark:text-white hover:opacity-70 transition">
-                  {label}
-                </span>
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMenu}
+                className="text-sm font-medium text-black transition hover:opacity-70 dark:text-white"
+              >
+                {lang === "pl" ? link.labelPl : link.labelEn}
               </Link>
-            );
-          })}
-        </div>
+            )
+          )}
 
-          {/* LANGUAGE TOGGLE (no icon) */}
           <button
             type="button"
             onClick={toggleLang}
-            className="ml-2 px-3 py-2 rounded-lg border border-black/10 dark:border-white/10
-                       hover:bg-black/5 dark:hover:bg-white/10 transition"
+            className="rounded-full border border-black/10 px-3 py-2 transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
             aria-label="Toggle language"
-            title={lang === 'pl' ? 'Zmień język' : 'Change language'}
+            title={lang === "pl" ? "Zmień język" : "Change language"}
+          >
+            <span className="text-sm font-semibold text-black dark:text-white">
+              {languageLabel}
+            </span>
+          </button>
+        </div>
+
+        <div className="flex items-center gap-3 md:hidden">
+          <button
+            type="button"
+            onClick={toggleLang}
+            className="rounded-full border border-black/10 px-3 py-2 transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/10"
+            aria-label="Toggle language"
           >
             <span className="text-sm font-semibold text-black dark:text-white">
               {languageLabel}
             </span>
           </button>
 
-        {/* MOBILE MENU BUTTON */}
-        <button
-          type="button"
-          onClick={toggleMenu}
-          className="md:hidden text-black dark:text-white ml-auto"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+          <button
+            type="button"
+            onClick={toggleMenu}
+            className="text-black dark:text-white"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
-      {/* MOBILE DROPDOWN */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300
-          ${isOpen ? 'max-h-80 py-4' : 'max-h-0 py-0'}
-          bg-white dark:bg-black border-t border-black/10 dark:border-white/10
-        `}
+        className={`overflow-hidden bg-white transition-all duration-300 dark:bg-black md:hidden ${
+          isOpen ? "max-h-[420px] py-4" : "max-h-0 py-0"
+        }`}
       >
-        <div className="flex flex-col items-center gap-4">
-          {navLinks.map((link) => {
-            const label = lang === 'pl' ? link.labelPl : link.labelEn;
+        <div className="flex flex-col items-center gap-4 border-t border-black/10 px-6 pt-4 dark:border-white/10">
+          {isHome &&
+            homeLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={closeMenu}
+                className="text-black transition hover:opacity-70 dark:text-white"
+              >
+                {lang === "pl" ? link.labelPl : link.labelEn}
+              </a>
+            ))}
 
-            return pathname === link.href ? (
-              <span key={link.href} className="text-black/50 dark:text-white/50">
-                {label}
+          {externalLinks.map((link) =>
+            pathname === link.href ? (
+              <span key={link.href} className="text-black/40 dark:text-white/40">
+                {lang === "pl" ? link.labelPl : link.labelEn}
               </span>
             ) : (
-              <Link key={link.href} href={link.href} onClick={closeMenu}>
-                <span className="text-black dark:text-white hover:opacity-70 transition">
-                  {label}
-                </span>
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMenu}
+                className="text-black transition hover:opacity-70 dark:text-white"
+              >
+                {lang === "pl" ? link.labelPl : link.labelEn}
               </Link>
-            );
-          })}
-
-          <div className="flex gap-3 mt-2">
-            <button
-              type="button"
-              onClick={toggleLang}
-              className="px-4 py-2 rounded-lg border border-black/10 dark:border-white/10"
-            >
-              <span className="text-sm font-semibold text-black dark:text-white">
-                {lang === 'pl' ? 'PL / EN' : 'EN / PL'}
-              </span>
-            </button>
-          </div>
+            )
+          )}
         </div>
       </div>
     </nav>

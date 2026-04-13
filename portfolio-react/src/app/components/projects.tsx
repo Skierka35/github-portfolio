@@ -9,7 +9,7 @@ export type Project = {
   descriptionEn?: string;
   tags: TagId[];
   images?: string[];      // zawsze tablica
-  video?: string;
+  video?: string | string[];
   embed?: string;
   link?: string;
 };
@@ -25,7 +25,80 @@ export const TAG_LABELS: Record<TagId, { pl: string; en: string }> = {
 
 export const PROJECTS: Project[] = [
   {
+    id: 12,
+    slug: "photomontage",
+    title: "EdycjaZdjęć",
+    titleEn: "Powerchargers",
+    description:
+      "Projekt wizualny marki kosmetyków premium. Marka MollerSpa zawiera szereg produktów zapachowych, do pielęgnacji ciała.",
+    descriptionEn:
+      "Visual design for a premium cosmetics brand. The MollerSpa brand includes a range of fragranced body care products.",
+    images: ["PowerchargeElectroSoutions.png"],
+    tags: ["branding"],
+  },  
+  {
     id: 11,
+    slug: "Powercharge",
+    title: "ŁadowarkiElektryczne",
+    titleEn: "Powerchargers",
+    description:
+      "Projekt wizualny marki kosmetyków premium. Marka MollerSpa zawiera szereg produktów zapachowych, do pielęgnacji ciała.",
+    descriptionEn:
+      "Visual design for a premium cosmetics brand. The MollerSpa brand includes a range of fragranced body care products.",
+    images: ["PowerchargeElectroSoutions.png"],
+    tags: ["branding"],
+  },  
+  {
+    id: 10,
+    slug: "nexfuel",
+    title: "Nexfuel",
+    titleEn: "Nexfuel",
+    description:
+      "Projekt wizualny marki kosmetyków premium. Marka MollerSpa zawiera szereg produktów zapachowych, do pielęgnacji ciała.",
+    descriptionEn:
+      "Visual design for a premium cosmetics brand. The MollerSpa brand includes a range of fragranced body care products.",
+    video: ["NexFuelVideo.mp4"],
+    images: ["NexFuelZaproszenie.png"],
+    tags: ["branding"],
+  },  
+  {
+    id: 9,
+    slug: "mollerspa",
+    title: "MollerSpa",
+    titleEn: "MollerSpa",
+    description:
+      "Projekt wizualny marki kosmetyków premium. Marka MollerSpa zawiera szereg produktów zapachowych, do pielęgnacji ciała.",
+    descriptionEn:
+      "Visual design for a premium cosmetics brand. The MollerSpa brand includes a range of fragranced body care products.",
+    images: ["/Mollerspa-1.png","/Mollerspa-2.png","/Mollerspa-3.png"],
+    tags: ["branding"],
+  },
+  {
+    id: 8,
+    slug: "glimmerstone",
+    title: "Glimmerstone",
+    titleEn: "Glimmerstone",
+    description:
+      "Projekt wizualny marki uniwersalnej. Marka glimmerstone zawiera szereg produktów codziennego użytku.",
+    descriptionEn:
+      "A visual design for a universal brand, the Glimmerstone brand encompasses a range of everyday products.",
+    images: ["/Glimmerstone1.png","/Glimmerstone2.png","/Glimmerstone3.png"],
+    tags: ["branding"],
+  },
+    {
+    id: 7,
+    slug: "NexFuel",
+    title: "Zaproszenie NexFuel",
+    titleEn: "Invitation card NexFuel",
+    description:
+      "Projekt zaproszenia na targi, dla klientów marki NexFuel.",
+    descriptionEn:
+      "Team project: an app for tracking expenses and group settlements (frontend + feature planning).",
+    images: ["/NexFuel.png"],
+    tags: ["branding"],
+  },
+  {
+    id: 6,
     slug: "taotao",
     title: "TaoTaoTea",
     description: "Koncepcja identyfikacji wizualnej marki herbat.",
@@ -35,7 +108,7 @@ export const PROJECTS: Project[] = [
     tags: ["branding"],
   },
   {
-    id: 4,
+    id: 5,
     slug: "fluo-drinks",
     title: "Napoje Fluo",
     titleEn: "Fluo Drinks",
@@ -47,7 +120,7 @@ export const PROJECTS: Project[] = [
     tags: ["branding"],
   },
   {
-    id: 5,
+    id: 4,
     slug: "scary-movie-night",
     title: "Scary Movie Night",
     titleEn: "Scary Movie Night",
@@ -59,7 +132,7 @@ export const PROJECTS: Project[] = [
     tags: ["branding"],
   },
   {
-    id: 8,
+    id: 3,
     slug: "district-heating-network",
     title: "Sieć Ciepłownicza",
     titleEn: "District Heating Network",
@@ -84,19 +157,6 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 1,
-    slug: "budgeting-app",
-    title: "Budgeting App",
-    titleEn: "Budgeting App",
-    description:
-      "Projekt zespołowy: aplikacja do śledzenia wydatków i rozliczeń grupowych (frontend + planowanie funkcjonalności).",
-    descriptionEn:
-      "Team project: an app for tracking expenses and group settlements (frontend + feature planning).",
-    images: ["/budgetingApp.JPG"],
-    link: "https://budgeting-pi.vercel.app/demo",
-    tags: ["uiux"],
-  },
-  {
-    id: 10,
     slug: "cozy-bedroom",
     title: "Cozy Bedroom",
     titleEn: "Cozy Bedroom",
@@ -105,4 +165,5 @@ export const PROJECTS: Project[] = [
     images: ["/RenderResult.png"],
     tags: ["other"],
   },
+   
 ];

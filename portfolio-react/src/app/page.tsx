@@ -1,33 +1,43 @@
 "use client";
 
+import Link from "next/link";
 import Introduce from "./components/introduce";
 import ContactPage from "./components/contact";
 import HomeLatestProjects from "./components/homeLatestProjects";
 import { useLang } from "./components/languageProvider";
-import Link from "next/link";
 
 const TEXT = {
   pl: {
-    role: "Graphic Designer",
-    subtitle:
-      "Tworzę grafiki marketingowe, identyfikacje wizualne i materiały social media, które łączą estetykę z czytelnym przekazem.",
-    ctaPrimary: "Kontakt",
-    ctaSecondary: "Zobacz projekty",
+    role: "Grafik marketingowy",
+    subtitle: "Projektuję grafiki, które sprzedają i przyciągają uwagę.",
+    ctaPrimary: "Skontaktuj się ze mną",
+    ctaSecondary: "Zobacz moje projekty",
     latestTitle: "Wybrane projekty marketingowe",
     aboutTitle: "O mnie",
     servicesTitle: "Zakres współpracy",
     servicesSubtitle:
       "Projektuję materiały wizualne dla marek, kampanii i komunikacji online.",
     contactTitle: "Skontaktuj się ze mną",
+    portfolioLabel: "Portfolio",
+    contactLabel: "Kontakt",
     seeAll: "Zobacz wszystkie",
-    cards: {
-      specialization: "Specjalizacja",
-      focus: "Fokus",
-      availability: "Dostępność",
-      specializationValue: "Branding / Social Media / Video",
-      focusValue: "estetyka, spójność marki, komunikacja wizualna",
-      availabilityValue: "projekty freelance i współpraca zdalna",
-    },
+    aboutHeadline:
+      "Projektuję materiały, które mają dobrze wyglądać i działać jeszcze lepiej.",
+    heroCards: [
+      {
+        label: "Specjalizacja",
+        value: "Branding / social media / materiały marketingowe",
+      },
+      {
+        label: "Podejście",
+        value:
+          "Projektuję materiały, które przyciągają uwagę i jasno komunikują przekaz",
+      },
+      {
+        label: "Współpraca",
+        value: "Freelance / współpraca zdalna / projekty dla marek i kampanii",
+      },
+    ],
     services: [
       {
         title: "Grafiki do social media",
@@ -49,25 +59,35 @@ const TEXT = {
   },
   en: {
     role: "Marketing Designer",
-    subtitle:
-      "I create marketing visuals, brand identities and social media assets that combine aesthetics with clear communication.",
-    ctaPrimary: "Contact",
-    ctaSecondary: "View projects",
+    subtitle: "I design graphics that sell and attract attention.",
+    ctaPrimary: "Contact me",
+    ctaSecondary: "View my projects",
     latestTitle: "Selected marketing projects",
     aboutTitle: "About me",
     servicesTitle: "Services",
     servicesSubtitle:
       "I design visual materials for brands, campaigns and online communication.",
     contactTitle: "Get in touch",
+    portfolioLabel: "Portfolio",
+    contactLabel: "Contact",
     seeAll: "View all",
-    cards: {
-      specialization: "Specialization",
-      focus: "Focus",
-      availability: "Availability",
-      specializationValue: "Branding / Social Media / Video",
-      focusValue: "aesthetics, visual consistency, brand communication",
-      availabilityValue: "freelance projects and remote collaboration",
-    },
+    aboutHeadline:
+      "I design visual materials that should look good and work even better.",
+    heroCards: [
+      {
+        label: "Specialization",
+        value: "Branding / social media / marketing materials",
+      },
+      {
+        label: "Approach",
+        value:
+          "I design materials that attract attention and communicate clearly",
+      },
+      {
+        label: "Collaboration",
+        value: "Freelance / remote collaboration / projects for brands and campaigns",
+      },
+    ],
     services: [
       {
         title: "Social media graphics",
@@ -89,13 +109,18 @@ const TEXT = {
   },
 } as const;
 
+const sectionLabelClass =
+  "text-sm uppercase tracking-[0.22em] text-slate-500 dark:text-white/50";
+
+const cardBaseClass =
+  "rounded-2xl bg-[#f6f6f4] px-5 py-4 dark:bg-white/5";
+
 export default function Home() {
   const { lang } = useLang();
   const t = TEXT[lang];
 
   return (
     <main className="w-full bg-[#f6f6f4] text-slate-900 dark:bg-neutral-950 dark:text-slate-100">
-      {/* HERO */}
       <section className="relative min-h-[720px] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -145,57 +170,55 @@ export default function Home() {
           </div>
         </div>
 
-        {/* floating info cards */}
         <div className="relative z-10 mx-auto -mt-10 max-w-6xl px-4 md:px-6">
           <div className="grid gap-4 rounded-[2rem] border border-black/5 bg-white/90 p-4 shadow-xl backdrop-blur-md dark:border-white/10 dark:bg-white/5 md:grid-cols-3 md:p-6">
-            <div className="rounded-2xl bg-[#f6f6f4] px-5 py-4 dark:bg-white/5">
-              <p className="text-sm text-slate-500 dark:text-white/60">
-                {t.cards.specialization}
-              </p>
-              <p className="mt-1 font-medium">{t.cards.specializationValue}</p>
-            </div>
-
-            <div className="rounded-2xl bg-[#f6f6f4] px-5 py-4 dark:bg-white/5">
-              <p className="text-sm text-slate-500 dark:text-white/60">
-                {t.cards.focus}
-              </p>
-              <p className="mt-1 font-medium">{t.cards.focusValue}</p>
-            </div>
-
-            <div className="rounded-2xl bg-[#f6f6f4] px-5 py-4 dark:bg-white/5">
-              <p className="text-sm text-slate-500 dark:text-white/60">
-                {t.cards.availability}
-              </p>
-              <p className="mt-1 font-medium">{t.cards.availabilityValue}</p>
-            </div>
+            {t.heroCards.map((card) => (
+              <div key={card.label} className={cardBaseClass}>
+                <p className="text-sm text-slate-500 dark:text-white/60">
+                  {card.label}
+                </p>
+                <p className="mt-1 font-medium">{card.value}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* MAIN CONTENT */}
       <div className="mx-auto max-w-6xl px-6 pb-24 pt-16 md:px-8">
-        {/* ABOUT */}
+        <section id="projekty" className="scroll-mt-28 py-14">
+          <div className="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <p className={sectionLabelClass}>{t.portfolioLabel}</p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-3xl">
+                {t.latestTitle}
+              </h2>
+            </div>
+
+            <Link
+              href="/projects"
+              className="text-sm font-medium text-slate-700 underline underline-offset-4 dark:text-white/80"
+            >
+              {t.seeAll}
+            </Link>
+          </div>
+
+          <HomeLatestProjects />
+        </section>
+
         <section id="o-mnie" className="scroll-mt-28 py-14">
           <div className="mb-8">
-            <p className="text-sm uppercase tracking-[0.22em] text-slate-500 dark:text-white/50">
-              {t.aboutTitle}
-            </p>
+            <p className={sectionLabelClass}>{t.aboutTitle}</p>
             <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-3xl">
-              {lang === "pl"
-                ? "Projektuję materiały, które mają dobrze wyglądać i działać jeszcze lepiej."
-                : "I design visual materials that should look good and work even better."}
+              {t.aboutHeadline}
             </h2>
           </div>
 
           <Introduce />
         </section>
 
-        {/* SERVICES */}
         <section id="uslugi" className="scroll-mt-28 py-14">
           <div className="mb-10 max-w-3xl">
-            <p className="text-sm uppercase tracking-[0.22em] text-slate-500 dark:text-white/50">
-              {t.servicesTitle}
-            </p>
+            <p className={sectionLabelClass}>{t.servicesTitle}</p>
             <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-3xl">
               {t.servicesSubtitle}
             </h2>
@@ -216,35 +239,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PROJECTS */}
-        <section id="projekty" className="scroll-mt-28 py-14">
-          <div className="mb-8 flex items-end justify-between gap-4">
-            <div>
-              <p className="text-sm uppercase tracking-[0.22em] text-slate-500 dark:text-white/50">
-                Portfolio
-              </p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-3xl">
-                {t.latestTitle}
-              </h2>
-            </div>
-
-            <Link
-              href="/projects"
-              className="text-sm font-medium text-slate-700 underline underline-offset-4 dark:text-white/80"
-            >
-              {t.seeAll}
-            </Link>
-          </div>
-
-          <HomeLatestProjects />
-        </section>
-
-        {/* CONTACT */}
         <section id="kontakt" className="scroll-mt-28 py-14">
           <div className="mb-8">
-            <p className="text-sm uppercase tracking-[0.22em] text-slate-500 dark:text-white/50">
-              Contact
-            </p>
+            <p className={sectionLabelClass}>{t.contactLabel}</p>
             <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
               {t.contactTitle}
             </h2>

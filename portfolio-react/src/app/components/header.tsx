@@ -38,7 +38,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-8">
         <Link href="/" onClick={closeMenu} className="flex items-center gap-2">
           <span className="text-lg font-semibold tracking-wide text-black transition hover:opacity-70 dark:text-white sm:text-xl">
-            JULIA KOSZCZOŁ
+            PORTFOLIO
           </span>
         </Link>
 

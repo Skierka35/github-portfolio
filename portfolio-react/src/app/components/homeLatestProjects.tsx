@@ -2,12 +2,27 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
-import { PROJECTS, type TagId } from "../components/projects";
+import {
+  PROJECTS,
+  TAG_LABELS,
+  type Project,
+  type ProjectTag,
+} from "../components/projects";
 import { useLang } from "../components/languageProvider";
 
-function getLatestByTag(tag: TagId, limit: number) {
+function getProjectContent(project: Project, lang: "pl" | "en") {
+  return {
+    title: lang === "en" ? project.titleEn ?? project.title : project.title,
+    description:
+      lang === "en"
+        ? project.descriptionEn ?? project.description
+        : project.description,
+  };
+}
+
+function getLatestByTag(tag: ProjectTag, limit: number) {
   return PROJECTS
     .filter((project) => project.tags.includes(tag))
     .sort((a, b) => b.id - a.id)
@@ -23,6 +38,7 @@ const TEXT = {
     allProjects: "Wszystkie projekty",
     noThumb: "Brak podglądu",
     details: "Zobacz projekt",
+    previewOnly: "Podgląd projektu",
     previous: "Poprzedni",
     next: "Następny",
     category: "Branding / Marketing",
@@ -34,6 +50,7 @@ const TEXT = {
     allProjects: "All projects",
     noThumb: "No preview available",
     details: "View project",
+    previewOnly: "Project preview",
     previous: "Previous",
     next: "Next",
     category: "Branding / Marketing",
@@ -47,18 +64,21 @@ export default function HomeLatestProjects() {
   const projects = useMemo(() => getLatestByTag("branding", 4), []);
   const [current, setCurrent] = useState(0);
 
+  useEffect(() => {
+    if (current >= projects.length) {
+      setCurrent(0);
+    }
+  }, [current, projects.length]);
+
   const total = projects.length;
   const project = projects[current];
 
   if (!project) return null;
 
-  const title = lang === "en" ? project.titleEn ?? project.title : project.title;
-  const description =
-    lang === "en"
-      ? project.descriptionEn ?? project.description
-      : project.description;
-
-  const cover = project.images?.[0];
+  const { title, description } = getProjectContent(project, lang);
+  const cover = project.thumbnail ?? project.images[0] ?? null;
+  const hasCaseStudy = Boolean(project.caseStudy);
+  const hasExternalLink = Boolean(project.link);
 
   const goToPrev = () => setCurrent((prev) => (prev - 1 + total) % total);
   const goToNext = () => setCurrent((prev) => (prev + 1) % total);
@@ -128,28 +148,43 @@ export default function HomeLatestProjects() {
                 {description}
               </p>
 
-              {project.tags?.length > 0 && (
+              {project.tags.length > 0 && (
                 <div className="mt-5 flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
                       className="rounded-full border border-black/10 px-3 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:text-slate-200"
                     >
-                      {tag}
+                      {TAG_LABELS[tag][lang]}
                     </span>
                   ))}
                 </div>
               )}
 
-              <div className="mt-6">
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full bg-black px-5 py-3 text-sm font-medium text-white transition hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
-                >
-                  {t.details}
-                  <ExternalLink size={16} />
-                </Link>
-              </div>
+              {(hasCaseStudy || hasExternalLink) && (
+                <div className="mt-6 flex flex-wrap gap-3">
+                  {hasCaseStudy && (
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="inline-flex items-center gap-2 rounded-full bg-black px-5 py-3 text-sm font-medium text-white transition hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
+                    >
+                      {t.details}
+                      <ExternalLink size={16} />
+                    </Link>
+                  )}
+
+                  {!hasCaseStudy && hasExternalLink && (
+                    <Link
+                      href={project.link!}
+                      target="_blank"
+                      className="inline-flex items-center gap-2 rounded-full bg-black px-5 py-3 text-sm font-medium text-white transition hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
+                    >
+                      {t.previewOnly}
+                      <ExternalLink size={16} />
+                    </Link>
+                  )}
+                </div>
+              )}
             </div>
           </article>
 

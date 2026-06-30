@@ -1,120 +1,86 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
 import { useLang } from "./languageProvider";
 
-export default function Header() {
-  const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const { lang, toggleLang } = useLang();
+export default function ContactPage() {
+  const { lang } = useLang();
 
-  const isHome = pathname === "/";
-  const languageLabel = lang.toUpperCase();
-
-  if (isHome) return null;
-
-  const closeMenu = () => setIsOpen(false);
-
-  const links = [
-    {
-      href: "/projects",
-      labelPl: "Wszystkie projekty",
-      labelEn: "All projects",
+  const t = {
+    pl: {
+      label: "Kontakt",
+      title: "Porozmawiajmy o współpracy",
+      description:
+        "Masz projekt reklamowy, potrzebujesz grafik do social media albo materiałów promocyjnych? Napisz do mnie krótko, czego potrzebujesz, a ustalimy zakres współpracy.",
+      button: "Napisz do mnie",
+      email: "Julia.Koszczol112@gmail.com",
+      hintTitle: "Co warto napisać?",
+      hints: [
+        "czego dotyczy projekt",
+        "gdzie grafika będzie używana",
+        "jaki styl lub efekt chcesz osiągnąć",
+        "czy masz już materiały, logo lub teksty",
+      ],
     },
-  ];
+    en: {
+      label: "Contact",
+      title: "Let’s talk about working together",
+      description:
+        "Have an advertising project, need social media graphics or promotional materials? Send me a short message about what you need and we’ll define the project scope.",
+      button: "Email me",
+      email: "Julia.Koszczol112@gmail.com",
+      hintTitle: "What should you include?",
+      hints: [
+        "what the project is about",
+        "where the design will be used",
+        "what style or result you want",
+        "whether you already have assets, logo or text",
+      ],
+    },
+  }[lang === "pl" ? "pl" : "en"];
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-black/10 bg-white/80 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-8">
-        <Link href="/" onClick={closeMenu}>
-          <span className="text-lg font-semibold tracking-wide text-black transition hover:opacity-70 sm:text-xl">
-            PORTFOLIO
-          </span>
-        </Link>
+    <section id="kontakt" className="scroll-mt-24 border-t border-black/10 py-20">
+      <p className="mb-4 font-mono text-[11px] font-medium uppercase tracking-[0.35em] text-[#006970]">
+        {t.label}
+      </p>
 
-        <div className="hidden items-center gap-7 md:flex">
-          {links.map((link) =>
-            pathname === link.href ? (
-              <span
-                key={link.href}
-                className="cursor-default text-sm font-medium text-black/40"
-              >
-                {lang === "pl" ? link.labelPl : link.labelEn}
-              </span>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                className="text-sm font-medium text-black transition hover:opacity-70"
-              >
-                {lang === "pl" ? link.labelPl : link.labelEn}
-              </Link>
-            )
-          )}
+      <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div>
 
-          <button
-            type="button"
-            onClick={toggleLang}
-            className="rounded-full border border-black/10 px-3 py-2 transition hover:bg-black/5"
-            aria-label="Toggle language"
+          <h2 className="max-w-3xl text-4xl font-black leading-tight tracking-tight text-black md:text-6xl">
+            {t.title}
+          </h2>
+
+          <p className="mt-6 max-w-xl text-base leading-8 text-slate-700">
+            {t.description}
+          </p>
+
+          <Link
+            href={`mailto:${t.email}`}
+            className="mt-10 inline-flex items-center gap-3 bg-[#006970] px-7 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-white transition hover:brightness-110"
           >
-            <span className="text-sm font-semibold text-black">
-              {languageLabel}
-            </span>
-          </button>
+            {t.button}
+            <ArrowUpRight size={17} />
+          </Link>
         </div>
 
-        <div className="flex items-center gap-3 md:hidden">
-          <button
-            type="button"
-            onClick={toggleLang}
-            className="rounded-full border border-black/10 px-3 py-2 transition hover:bg-black/5"
-            aria-label="Toggle language"
-          >
-            <span className="text-sm font-semibold text-black">
-              {languageLabel}
-            </span>
-          </button>
+        <div className="border-t border-black/10 pt-8 lg:mt-20">
+          <h3 className="text-2xl font-black text-black">{t.hintTitle}</h3>
 
-          <button
-            type="button"
-            onClick={() => setIsOpen((value) => !value)}
-            className="text-black"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-      </nav>
-
-      <div
-        className={`overflow-hidden bg-white transition-all duration-300 md:hidden ${
-          isOpen ? "max-h-[240px] py-4" : "max-h-0 py-0"
-        }`}
-      >
-        <div className="flex flex-col items-center gap-4 border-t border-black/10 px-6 pt-4">
-          {links.map((link) =>
-            pathname === link.href ? (
-              <span key={link.href} className="text-black/40">
-                {lang === "pl" ? link.labelPl : link.labelEn}
-              </span>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                className="text-black transition hover:opacity-70"
-              >
-                {lang === "pl" ? link.labelPl : link.labelEn}
-              </Link>
-            )
-          )}
+          <ul className="mt-6 divide-y divide-black/10">
+            {t.hints.map((hint, index) => (
+              <li key={hint} className="grid grid-cols-[48px_1fr] py-4 text-sm leading-7 text-slate-700">
+                <span className="font-mono text-xs font-semibold text-[#006970]">
+                  0{index + 1}
+                </span>
+                <span>{hint}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-    </header>
+    </section>
   );
 }

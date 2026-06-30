@@ -3,53 +3,78 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Mail,
-  Phone,
+  ArrowDown,
   Globe,
-  MapPin,
+  Github,
   Instagram,
   Linkedin,
-  Github,
+  Mail,
+  MapPin,
+  Phone,
 } from "lucide-react";
-import Introduce from "./components/introduce";
 import ContactPage from "./components/contact";
 import HomeLatestProjects from "./components/homeLatestProjects";
 import { useLang } from "./components/languageProvider";
 
 const TEXT = {
   pl: {
-    role: "Grafik marketingowy",
+    heroKicker: "Graphic designer & ad strategist",
+    heroLineOne: "Kreatywne Rozwiązania,",
+    heroLineTwo: "Które Sprzedają",
+    heroLead:
+      "Łączę reklamowe podejście z ilustracyjnym wyczuciem koloru i kompozycji. Tworzę materiały wizualne, które przyciągają uwagę, budują rozpoznawalność i jasno prowadzą odbiorcę do komunikatu marki.",
+    scroll: "Przejdź do projektów",
+    role: "Grafika reklamowa z ilustracyjnym wyczuciem koloru i kompozycji",
     name: "Julia Koszczoł",
-    pronouns: "she/her",
-    introLabel: "Intro",
-    intro:
-      "Projektuję materiały wizualne dla marek, kampanii i komunikacji online. Skupiam się na estetyce, czytelności i spójnym przekazie, żeby projekty nie tylko dobrze wyglądały, ale też wspierały cel marki.",
     aboutLabel: "O mnie",
     about:
       "Junior graphic designer skupiona na brandingu, social mediach i materiałach marketingowych.",
     projectsLabel: "Projekty",
-    experienceLabel: "Zakres współpracy",
+    experienceLabel: "Oferta",
     contactLabel: "Kontakt",
     skillsLabel: "Umiejętności",
     languagesLabel: "Języki",
+    Linkedin: "https://www.linkedin.com/in/julia-koszczo%C5%82-199516226/",
     location: "Polska / zdalnie",
     email: "Julia.Koszczol112@gmail.com",
     phone: "+48 508 617 676",
     website: "portfolio-preview-skierka.netlify.app",
-    contactTitle: "Porozmawiajmy o współpracy",
     viewAll: "Wszystkie projekty",
+    selectedProjects: "Wybrane realizacje",
+    projectsDescription:
+      "Projekty z zakresu grafiki reklamowej, social mediów, ilustracji i komunikacji wizualnej.",
+    offerTitle: "W czym mogę pomóc?",
+    offerDescription:
+      "Tworzę materiały wizualne, które pomagają markom wyglądać spójnie, profesjonalnie i czytelnie komunikować swoją ofertę.",
+    aboutTitle: "Design to communication.",
+    aboutText:
+      "W projektach skupiam się na równowadze między estetyką a funkcją. Grafika ma nie tylko wyglądać dobrze, ale też wspierać konkretny cel: sprzedaż, rozpoznawalność, wizerunek lub komunikację marki.",
+    aboutCards: [
+      {
+        title: "Komunikacja",
+        text: "Dbam o to, żeby projekt był czytelny i dopasowany do odbiorcy.",
+      },
+      {
+        title: "Spójność",
+        text: "Tworzę materiały, które pasują do charakteru marki i jej komunikacji.",
+      },
+      {
+        title: "Ilustracyjne wyczucie",
+        text: "Doświadczenie z ilustracją pomaga mi świadomie pracować z kolorem, nastrojem i kompozycją.",
+      },
+    ],
     services: [
       {
-        title: "Branding i identyfikacja",
-        text: "Logo, key visuale, podstawowe systemy wizualne i spójna komunikacja marki.",
+        title: "Grafika reklamowa",
+        text: "Banery, reklamy digitalowe, grafiki promocyjne i materiały przygotowane pod kampanie online.",
       },
       {
         title: "Social media",
-        text: "Posty, karuzele, grafiki promocyjne i materiały dopasowane do kanałów online.",
+        text: "Posty, karuzele, stories i grafiki sprzedażowe dopasowane do komunikacji marki w social mediach.",
       },
       {
         title: "Materiały marketingowe",
-        text: "Banery, prezentacje, grafiki reklamowe, digital assets i proste materiały sprzedażowe.",
+        text: "Prezentacje, ulotki, proste layouty, key visuale i digital assets wspierające promocję usług lub produktów.",
       },
     ],
     skills: [
@@ -66,38 +91,63 @@ const TEXT = {
     languages: ["Polski", "Angielski", "Niemiecki"],
   },
   en: {
-    role: "Marketing Designer",
+    heroKicker: "Graphic designer & ad strategist",
+    heroLineOne: "Creative Solutions,",
+    heroLineTwo: "That Sell",
+    heroLead:
+      "I combine advertising thinking with an illustrative sense of color and composition. I create visual materials that attract attention, build recognition and guide the audience toward the brand message.",
+    scroll: "Scroll to projects",
+    role: "Advertising design with an illustrative sense of color and composition",
     name: "Julia Koszczoł",
-    pronouns: "she/her",
-    introLabel: "Intro",
-    intro:
-      "I design visual materials for brands, campaigns and online communication. I focus on aesthetics, clarity and consistent messaging, so the projects not only look good but also support the brand’s goal.",
     aboutLabel: "About",
     about:
       "Junior graphic designer focused on branding, social media and marketing materials.",
     projectsLabel: "Projects",
-    experienceLabel: "Services",
+    experienceLabel: "Offer",
     contactLabel: "Contact",
     skillsLabel: "Skills",
     languagesLabel: "Languages",
     location: "Poland / remote",
+    Linkedin: "https://www.linkedin.com/in/julia-koszczo%C5%82-199516226/",
     email: "Julia.Koszczol112@gmail.com",
     phone: "+48 508 617 676",
     website: "portfolio-preview-skierka.netlify.app",
-    contactTitle: "Let’s talk about cooperation",
     viewAll: "All projects",
+    selectedProjects: "Selected work",
+    projectsDescription:
+      "Projects focused on advertising design, social media, illustration and visual communication.",
+    offerTitle: "How can I help?",
+    offerDescription:
+      "I create visual materials that help brands look consistent, professional and communicate their offer clearly.",
+    aboutTitle: "Design to communication.",
+    aboutText:
+      "In my projects, I focus on balancing aesthetics and function. Design should not only look good, but also support a specific goal: sales, recognition, image or brand communication.",
+    aboutCards: [
+      {
+        title: "Communication",
+        text: "I make sure the project is clear and tailored to its audience.",
+      },
+      {
+        title: "Consistency",
+        text: "I create materials that match the brand’s character and communication.",
+      },
+      {
+        title: "Illustrative sensitivity",
+        text: "My illustration background helps me work intentionally with color, mood and composition.",
+      },
+    ],
     services: [
       {
-        title: "Branding and identity",
-        text: "Logos, key visuals, basic visual systems and consistent brand communication.",
+        title: "Advertising graphics",
+        text: "Banners, digital ads, promotional graphics and visual assets prepared for online campaigns.",
       },
       {
         title: "Social media",
-        text: "Posts, carousels, promotional graphics and assets tailored for online channels.",
+        text: "Posts, carousels, stories and sales-oriented graphics tailored to brand communication in social media.",
       },
       {
         title: "Marketing materials",
-        text: "Banners, presentations, ad creatives, digital assets and simple sales materials.",
+        text: "Presentations, leaflets, simple layouts, key visuals and digital assets supporting products or services.",
       },
     ],
     skills: [
@@ -116,10 +166,7 @@ const TEXT = {
 } as const;
 
 const labelClass =
-  "mb-3 text-[11px] uppercase tracking-[0.22em] text-slate-400";
-
-const cardClass =
-  "rounded-2xl border border-black/5 bg-white p-5 shadow-sm";
+  "mb-4 font-mono text-[11px] font-medium uppercase tracking-[0.35em] text-[#006970]";
 
 export default function Home() {
   const { lang, toggleLang } = useLang();
@@ -127,74 +174,79 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#f4f4f1] px-5 py-6 text-slate-900 lg:px-8">
-      <div className="mx-auto max-w-7xl rounded-[2rem] border border-black/5 bg-white shadow-sm">
-        <div className="grid grid-cols-1 lg:grid-cols-[320px_40px_1fr]">
+      <div className="mx-auto max-w-[1440px] rounded-[2rem] border border-black/5 bg-white shadow-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-[320px_minmax(0,1fr)]">
           {/* LEFT SIDEBAR */}
           <aside className="border-b border-black/5 p-6 lg:sticky lg:top-6 lg:h-[calc(100vh-48px)] lg:border-b-0">
             <div className="flex h-full flex-col">
+              <div className="flex justify-center">
+              <div className="relative h-28 w-28 overflow-hidden rounded-full border border-black/10 bg-white shadow-sm">
+                <Image
+                  src="/prof.png"
+                  alt={t.name}
+                  fill
+                  sizes="120px"
+                  className="object-cover object-center"
+                  priority
+                />
+              </div>
+            </div>
               <div>
-                <div className="relative h-20 w-20 overflow-hidden rounded-full border border-black/10">
-                  <Image
-                    src="/prof.jpg"
-                    alt={t.name}
-                    fill
-                    sizes="80px"
-                    className="object-cover"
-                  />
-                </div>
-
+                
                 <div className="mt-5">
-                  <h1 className="text-2xl font-semibold tracking-tight">
-                    {t.name}
-                  </h1>
-                  <p className="mt-1 text-sm text-slate-500">{t.pronouns}</p>
+                  <h1 className="flex justify-center text-2xl font-semibold tracking-tight">{t.name}</h1>
                 </div>
 
                 <div className="mt-7">
-                  <p className={labelClass}>{t.aboutLabel}</p>
-                  <p className="text-sm leading-relaxed text-slate-600">
-                    {t.about}
+                  <p className="mb-3 text-[11px] uppercase tracking-[0.22em] text-slate-400">
+                    {t.aboutLabel}
                   </p>
+                  <p className="text-sm leading-relaxed text-slate-600">{t.about}</p>
                 </div>
 
                 <div className="mt-7">
-                  <p className={labelClass}>{t.contactLabel}</p>
+                  <p className="mb-3 text-[11px] uppercase tracking-[0.22em] text-slate-400">
+                    {t.contactLabel}
+                  </p>
 
                   <div className="space-y-3 text-sm text-slate-600">
-                    <a
-                      href={`mailto:${t.email}`}
-                      className="flex items-center gap-3 transition hover:text-slate-950"
-                    >
-                      <Mail size={16} />
-                      <span className="break-all">{t.email}</span>
-                    </a>
+                  <a
+                    href={`mailto:${t.email}`}
+                    className="grid grid-cols-[18px_1fr] items-center gap-3 transition hover:text-slate-950"
+                  >
+                    <Mail size={16} className="justify-self-center" />
+                    <span className="break-all">{t.email}</span>
+                  </a>
 
-                    <a
-                      href={`https://${t.website}`}
-                      target="_blank"
-                      className="flex items-center gap-3 transition hover:text-slate-950"
-                    >
-                      <Globe size={16} />
-                      <span className="break-all">{t.website}</span>
-                    </a>
+                  <a
+                    href={t.Linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="grid grid-cols-[18px_1fr] items-center gap-3 transition hover:text-slate-950"
+                  >
+                    <Linkedin size={16} className="justify-self-center" />
+                    <span>LinkedIn</span>
+                  </a>
 
-                    <a
-                      href={`tel:${t.phone.replaceAll(" ", "")}`}
-                      className="flex items-center gap-3 transition hover:text-slate-950"
-                    >
-                      <Phone size={16} />
-                      <span>{t.phone}</span>
-                    </a>
+                  <a
+                    href={`tel:${t.phone.replaceAll(" ", "")}`}
+                    className="grid grid-cols-[18px_1fr] items-center gap-3 transition hover:text-slate-950"
+                  >
+                    <Phone size={16} className="justify-self-center" />
+                    <span>{t.phone}</span>
+                  </a>
 
-                    <div className="flex items-center gap-3">
-                      <MapPin size={16} />
-                      <span>{t.location}</span>
-                    </div>
+                  <div className="grid grid-cols-[18px_1fr] items-center gap-3">
+                    <MapPin size={16} className="justify-self-center" />
+                    <span>{t.location}</span>
                   </div>
+                </div>
                 </div>
 
                 <div className="mt-7">
-                  <p className={labelClass}>{t.skillsLabel}</p>
+                  <p className="mb-3 text-[11px] uppercase tracking-[0.22em] text-slate-400">
+                    {t.skillsLabel}
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {t.skills.map((skill) => (
                       <span
@@ -208,7 +260,9 @@ export default function Home() {
                 </div>
 
                 <div className="mt-7">
-                  <p className={labelClass}>{t.languagesLabel}</p>
+                  <p className="mb-3 text-[11px] uppercase tracking-[0.22em] text-slate-400">
+                    {t.languagesLabel}
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {t.languages.map((language) => (
                       <span
@@ -221,43 +275,44 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-
-              <div className="mt-auto hidden items-center gap-5 pt-10 text-slate-400 lg:flex">
-                <a href="#" aria-label="Instagram" className="hover:text-black">
-                  <Instagram size={18} />
-                </a>
-                <a href="#" aria-label="LinkedIn" className="hover:text-black">
-                  <Linkedin size={18} />
-                </a>
-                <a href="#" aria-label="GitHub" className="hover:text-black">
-                  <Github size={18} />
-                </a>
-              </div>
             </div>
           </aside>
-          <div className="hidden  border-black/5 bg-white lg:block" />
-          
-          {/* RIGHT CONTENT */}
-          <section className="min-h-screen">
+
+          {/* MAIN CONTENT */}
+          <section className="min-h-screen border-l border-black/5">
             {/* LOCAL STICKY HEADER */}
-            <div className="sticky top-0 z-40 flex items-center justify-end gap-6 border-b border-black/5 bg-white/90 px-6 py-4 backdrop-blur-md md:px-10 lg:px-12">
+            <div className="sticky top-0 z-40 flex items-center justify-end gap-6 border-b border-black/5 bg-white/85 px-6 py-4 backdrop-blur-xl md:px-10 lg:px-12">
               <a
                 href="#projekty"
-                className="text-sm font-medium text-slate-700 transition hover:text-black"
+                className="text-sm font-medium text-slate-700 transition hover:text-[#006970]"
               >
                 {lang === "pl" ? "Projekty" : "Projects"}
               </a>
 
               <a
+                href="#oferta"
+                className="text-sm font-medium text-slate-700 transition hover:text-[#006970]"
+              >
+                {lang === "pl" ? "Oferta" : "Services"}
+              </a>
+
+              <a
+                href="#about"
+                className="text-sm font-medium text-slate-700 transition hover:text-[#006970]"
+              >
+                {lang === "pl" ? "O mnie" : "About"}
+              </a>
+
+              <a
                 href="#kontakt"
-                className="text-sm font-medium text-slate-700 transition hover:text-black"
+                className="text-sm font-medium text-slate-700 transition hover:text-[#006970]"
               >
                 {lang === "pl" ? "Kontakt" : "Contact"}
               </a>
 
               <Link
                 href="/projects"
-                className="text-sm font-medium text-slate-700 transition hover:text-black"
+                className="text-sm font-medium text-slate-700 transition hover:text-[#006970]"
               >
                 {lang === "pl" ? "Wszystkie projekty" : "All projects"}
               </Link>
@@ -265,7 +320,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={toggleLang}
-                className="rounded-full border border-black/10 px-3 py-2 text-sm font-semibold transition hover:bg-black/5"
+                className="rounded-full border border-black/10 bg-white px-3 py-2 text-sm font-semibold transition hover:bg-black/5"
                 aria-label="Toggle language"
               >
                 {lang.toUpperCase()}
@@ -273,51 +328,52 @@ export default function Home() {
             </div>
 
             <div className="px-6 py-8 md:px-10 lg:px-12">
-              {/* INTRO */}
-              <section className="pb-12">
-                <p className={labelClass}>{t.introLabel}</p>
+              {/* INTRO / HERO */}
+              <section id="up" className="min-h-[620px] pb-16 pt-10 md:pt-16">
+                <p className="mb-6 font-mono text-[11px] font-medium uppercase tracking-[0.35em] text-[#006970]">
+                  {t.heroKicker}
+                </p>
 
-                <div className="grid gap-8 lg:grid-cols-[1fr_260px] lg:items-start">
-                  <div>
-                    <h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-                      {t.role}
-                    </h2>
+                <h2 className="max-w-5xl text-[clamp(3rem,7vw,6.8rem)] font-black leading-[0.98] tracking-[-0.06em] text-black">
+                  {t.heroLineOne}
+                  <br />
+                  <span className="italic text-[#006970]">{t.heroLineTwo}</span>
+                </h2>
 
-                    <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">
-                      {t.intro}
-                    </p>
-                  </div>
+                <p className="mt-10 max-w-xl text-base leading-8 text-slate-700">
+                  {t.heroLead}
+                </p>
 
-                  <div className="hidden overflow-hidden rounded-3xl border border-black/5 bg-slate-100 lg:block">
-                    <Image
-                      src="/bajkowysen.png"
-                      alt=""
-                      width={520}
-                      height={640}
-                      className="h-72 w-full object-cover"
-                    />
-                  </div>
-                </div>
+                <a
+                  href="#projekty"
+                  className="mt-12 inline-flex items-center gap-4 font-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-800 transition hover:text-[#006970]"
+                >
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#006970] text-[#006970] transition group-hover:bg-[#006970] group-hover:text-white">
+                    <ArrowDown size={16} />
+                  </span>
+                  {t.scroll}
+                </a>
               </section>
 
               {/* PROJECTS */}
               <section
                 id="projekty"
-                className="scroll-mt-20 border-t border-black/5 py-12"
+                className="scroll-mt-24 border-t border-black/10 py-20"
               >
-                <div className="mb-6 flex items-end justify-between gap-4">
+                <div className="mb-12 flex items-end justify-between gap-4">
                   <div>
                     <p className={labelClass}>{t.projectsLabel}</p>
-                    <h2 className="text-2xl font-semibold tracking-tight">
-                      {lang === "pl"
-                        ? "Wybrane realizacje"
-                        : "Selected projects"}
+                    <h2 className="text-4xl font-black tracking-tight text-black md:text-5xl">
+                      {t.selectedProjects}
                     </h2>
+                    <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600">
+                      {t.projectsDescription}
+                    </p>
                   </div>
 
                   <Link
                     href="/projects"
-                    className="text-sm font-medium text-slate-700 underline underline-offset-4"
+                    className="hidden border border-black/15 px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-800 transition hover:border-[#006970] hover:text-[#006970] sm:block"
                   >
                     {t.viewAll}
                   </Link>
@@ -327,45 +383,88 @@ export default function Home() {
               </section>
 
               {/* SERVICES */}
-              <section className="border-t border-black/5 py-12">
+              <section
+                id="oferta"
+                className="scroll-mt-24 border-t border-black/10 py-20"
+              >
                 <p className={labelClass}>{t.experienceLabel}</p>
 
-                <div className="space-y-4">
-                  {t.services.map((service) => (
-                    <article key={service.title} className={cardClass}>
-                      <h3 className="text-lg font-semibold">
-                        {service.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                        {service.text}
-                      </p>
-                    </article>
-                  ))}
+                <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+                  <div>
+                    <h2 className="text-4xl font-black tracking-tight text-black md:text-5xl">
+                      {t.offerTitle}
+                    </h2>
+                    <p className="mt-6 max-w-xl text-base leading-8 text-slate-600">
+                      {t.offerDescription}
+                    </p>
+                  </div>
+
+                  <div className="divide-y divide-black/10 border-t border-black/10">
+                    {t.services.map((service, index) => (
+                      <article
+                        key={service.title}
+                        className="grid gap-6 py-8 sm:grid-cols-[72px_1fr]"
+                      >
+                        <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-[#006970]">
+                          0{index + 1}
+                        </p>
+
+                        <div>
+                          <h3 className="text-2xl font-black tracking-tight text-black">
+                            {service.title}
+                          </h3>
+                          <p className="mt-3 text-sm leading-7 text-slate-600 md:text-base">
+                            {service.text}
+                          </p>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
                 </div>
               </section>
 
               {/* ABOUT */}
-              <section className="border-t border-black/5 py-12">
+              <section
+                id="about"
+                className="scroll-mt-24 border-t border-black/10 py-20"
+              >
                 <p className={labelClass}>
                   {lang === "pl" ? "Więcej o mnie" : "More about me"}
                 </p>
-                <Introduce />
+
+                <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
+                  <div>
+                    <h2 className="text-4xl font-black leading-tight tracking-tight text-black md:text-6xl">
+                      {t.aboutTitle}
+                    </h2>
+                  </div>
+
+                  <div>
+                    <p className="text-lg leading-9 text-slate-700">
+                      {t.aboutText}
+                    </p>
+
+                    <div className="mt-10 divide-y divide-black/10 border-t border-black/10">
+                      {t.aboutCards.map((card, index) => (
+                        <div key={card.title} className="grid gap-4 py-7 sm:grid-cols-[56px_1fr]">
+                          <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-[#006970]">
+                            0{index + 1}
+                          </p>
+                          <div>
+                            <h3 className="text-xl font-black text-black">{card.title}</h3>
+                            <p className="mt-2 text-sm leading-7 text-slate-600">
+                              {card.text}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </section>
 
               {/* CONTACT */}
-              <section
-                id="kontakt"
-                className="scroll-mt-20 border-t border-black/5 py-12"
-              >
-                <p className={labelClass}>{t.contactLabel}</p>
-                <h2 className="mb-6 text-2xl font-semibold tracking-tight">
-                  {t.contactTitle}
-                </h2>
-
-                <div className="rounded-3xl border border-black/5 bg-[#f8f8f6] p-5">
-                  <ContactPage />
-                </div>
-              </section>
+              <ContactPage />
             </div>
           </section>
         </div>

@@ -370,13 +370,6 @@ export default function Home() {
                       {t.projectsDescription}
                     </p>
                   </div>
-
-                  <Link
-                    href="/projects"
-                    className="hidden border border-black/15 px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-800 transition hover:border-[#006970] hover:text-[#006970] sm:block"
-                  >
-                    {t.viewAll}
-                  </Link>
                 </div>
 
                 <HomeLatestProjects />

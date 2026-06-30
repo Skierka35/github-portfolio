@@ -1,127 +1,120 @@
 "use client";
 
-import { Mail, Phone, Briefcase, MapPin } from "lucide-react";
-import { useLang } from "../components/languageProvider";
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { useLang } from "./languageProvider";
 
-export default function ContactPage() {
-  const { lang } = useLang();
+export default function Header() {
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const { lang, toggleLang } = useLang();
 
-  const TEXT = {
-    pl: {
-      eyebrow: "Kontakt",
-      title: "Porozmawiajmy o współpracy",
-      description:
-        "Jeśli szukasz osoby do projektów brandingowych, materiałów marketingowych lub grafik do social media, napisz do mnie. Chętnie porozmawiam o zakresie, estetyce i potrzebach Twojej marki.",
-      email: "Email",
-      phone: "Telefon",
-      availability: "Współpraca",
-      location: "Lokalizacja",
-      availabilityValue: "Freelance / współpraca zdalna",
-      locationValue: "Polska",
-      cta: "Napisz wiadomość",
+  const isHome = pathname === "/";
+  const languageLabel = lang.toUpperCase();
+
+  if (isHome) return null;
+
+  const closeMenu = () => setIsOpen(false);
+
+  const links = [
+    {
+      href: "/projects",
+      labelPl: "Wszystkie projekty",
+      labelEn: "All projects",
     },
-    en: {
-      eyebrow: "Contact",
-      title: "Let’s talk about your project",
-      description:
-        "If you are looking for someone to create branding, marketing materials or social media graphics, feel free to contact me. I’d be happy to discuss the scope, visual direction and needs of your brand.",
-      email: "Email",
-      phone: "Phone",
-      availability: "Availability",
-      location: "Location",
-      availabilityValue: "Freelance / remote collaboration",
-      locationValue: "Poland",
-      cta: "Send a message",
-    },
-  } as const;
-
-  const t = TEXT[lang];
+  ];
 
   return (
-    <section className="w-full">
-      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        {/* LEFT SIDE */}
-        <div className="rounded-[2rem] border border-black/5 bg-[#f8f7f3] p-8 dark:border-white/10 dark:bg-white/5 md:p-10">
-          <p className="text-sm uppercase tracking-[0.22em] text-slate-500 dark:text-white/50">
-            {t.eyebrow}
-          </p>
+    <header className="fixed left-0 top-0 z-50 w-full border-b border-black/10 bg-white/80 backdrop-blur-xl">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-8">
+        <Link href="/" onClick={closeMenu}>
+          <span className="text-lg font-semibold tracking-wide text-black transition hover:opacity-70 sm:text-xl">
+            PORTFOLIO
+          </span>
+        </Link>
 
-          <h3 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 md:text-4xl">
-            {t.title}
-          </h3>
+        <div className="hidden items-center gap-7 md:flex">
+          {links.map((link) =>
+            pathname === link.href ? (
+              <span
+                key={link.href}
+                className="cursor-default text-sm font-medium text-black/40"
+              >
+                {lang === "pl" ? link.labelPl : link.labelEn}
+              </span>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMenu}
+                className="text-sm font-medium text-black transition hover:opacity-70"
+              >
+                {lang === "pl" ? link.labelPl : link.labelEn}
+              </Link>
+            )
+          )}
 
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
-            {t.description}
-          </p>
-
-          <div className="mt-8">
-            <a
-              href="mailto:Julia.Koszczol112@gmail.com"
-              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800 dark:bg-white dark:text-black dark:hover:bg-white/90"
-            >
-              <Mail size={16} />
-              {t.cta}
-            </a>
-          </div>
+          <button
+            type="button"
+            onClick={toggleLang}
+            className="rounded-full border border-black/10 px-3 py-2 transition hover:bg-black/5"
+            aria-label="Toggle language"
+          >
+            <span className="text-sm font-semibold text-black">
+              {languageLabel}
+            </span>
+          </button>
         </div>
 
-        {/* RIGHT SIDE */}
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-[1.5rem] border border-black/5 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 dark:bg-white/10">
-              <Mail size={18} className="text-slate-700 dark:text-slate-200" />
-            </div>
-            <p className="text-sm uppercase tracking-[0.18em] text-slate-500 dark:text-white/50">
-              {t.email}
-            </p>
-            <a
-              href="mailto:Julia.Koszczol112@gmail.com"
-              className="mt-3 block break-all text-base font-medium text-slate-900 transition hover:opacity-70 dark:text-slate-100"
-            >
-              Julia.Koszczol112@gmail.com
-            </a>
-          </div>
+        <div className="flex items-center gap-3 md:hidden">
+          <button
+            type="button"
+            onClick={toggleLang}
+            className="rounded-full border border-black/10 px-3 py-2 transition hover:bg-black/5"
+            aria-label="Toggle language"
+          >
+            <span className="text-sm font-semibold text-black">
+              {languageLabel}
+            </span>
+          </button>
 
-          <div className="rounded-[1.5rem] border border-black/5 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 dark:bg-white/10">
-              <Phone size={18} className="text-slate-700 dark:text-slate-200" />
-            </div>
-            <p className="text-sm uppercase tracking-[0.18em] text-slate-500 dark:text-white/50">
-              {t.phone}
-            </p>
-            <a
-              href="tel:+48508617676"
-              className="mt-3 block text-base font-medium text-slate-900 transition hover:opacity-70 dark:text-slate-100"
-            >
-              +48 508 617 676
-            </a>
-          </div>
+          <button
+            type="button"
+            onClick={() => setIsOpen((value) => !value)}
+            className="text-black"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </nav>
 
-          <div className="rounded-[1.5rem] border border-black/5 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 dark:bg-white/10">
-              <Briefcase size={18} className="text-slate-700 dark:text-slate-200" />
-            </div>
-            <p className="text-sm uppercase tracking-[0.18em] text-slate-500 dark:text-white/50">
-              {t.availability}
-            </p>
-            <p className="mt-3 text-base font-medium text-slate-900 dark:text-slate-100">
-              {t.availabilityValue}
-            </p>
-          </div>
-
-          <div className="rounded-[1.5rem] border border-black/5 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 dark:bg-white/10">
-              <MapPin size={18} className="text-slate-700 dark:text-slate-200" />
-            </div>
-            <p className="text-sm uppercase tracking-[0.18em] text-slate-500 dark:text-white/50">
-              {t.location}
-            </p>
-            <p className="mt-3 text-base font-medium text-slate-900 dark:text-slate-100">
-              {t.locationValue}
-            </p>
-          </div>
+      <div
+        className={`overflow-hidden bg-white transition-all duration-300 md:hidden ${
+          isOpen ? "max-h-[240px] py-4" : "max-h-0 py-0"
+        }`}
+      >
+        <div className="flex flex-col items-center gap-4 border-t border-black/10 px-6 pt-4">
+          {links.map((link) =>
+            pathname === link.href ? (
+              <span key={link.href} className="text-black/40">
+                {lang === "pl" ? link.labelPl : link.labelEn}
+              </span>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMenu}
+                className="text-black transition hover:opacity-70"
+              >
+                {lang === "pl" ? link.labelPl : link.labelEn}
+              </Link>
+            )
+          )}
         </div>
       </div>
-    </section>
+    </header>
   );
 }
